@@ -11,7 +11,8 @@ namespace LibraryTerminalProject
         public string Status { get; set; }
 
 
-        public virtual void PrintItems(string filePath) //what goes in
+        public virtual void PrintItems(string filePath)
+
         {
             StreamReader read = new StreamReader(filePath);
             string output = read.ReadToEnd();
@@ -38,7 +39,9 @@ namespace LibraryTerminalProject
             }
         }
 
+
         public virtual Library ConvertToList(string line)
+
         {
             string[] prop = line.Split(',');
             Library l = new Library();
@@ -46,7 +49,9 @@ namespace LibraryTerminalProject
             if (prop.Length == 2) //change
             {
                 l.Status = prop[0]; //change
-                l.Title = prop[1]; //change
+                l.Title = prop[1];
+                
+                //change
                 return l;
             }
             else
@@ -55,10 +60,13 @@ namespace LibraryTerminalProject
             }
         }
 
-        public virtual string CheckOutItem()
+
+   
+
+        public virtual void CheckOutItem()
+
         {
-            string line = "Hi";
-            return line;
+
         }
 
         public virtual string ReturnItem()
@@ -67,10 +75,12 @@ namespace LibraryTerminalProject
             return line;
         }
 
-        public virtual string SearchFor()
+
+
+        public virtual void SearchFor()
+
         {
-            string line = "Hi";
-            return line;
+            
         }
 
     }
