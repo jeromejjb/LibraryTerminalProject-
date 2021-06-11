@@ -1,0 +1,12 @@
+﻿No, The Great Gatsby, F. Scott Fitzgerald, Category.Fiction
+Yes, To Kill A Mockingbird, Harper Lee, Category.Fiction
+No, Cat In The Cat, Dr. Suess, Category.Fiction
+Yes, The Lord Of The Rings, J.R.R Tolkien, Category.Fiction
+Yes, Imposter Syndrome, Kathy Wang, Category.Mystery
+No,While Justice Sleeps, Stacey Abrams, Category.Mystery
+The Anthropocene Reviewed, John Green, Category.Nonfiction
+The 4-Hour Workweek, Tim Ferris, Category.Nonfictoin
+Why Nations Fail, Daron Acemoglu and James A. Robinson, Category.Nonfiction
+The Art of War, Sun Tzu, Category.Nonfiction
+Vagabonding, Rolf Potts, Category.Nonfiction
+Realm Breaker, Victoria Aveyard, Category.Fiction

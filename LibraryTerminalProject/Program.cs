@@ -6,11 +6,6 @@ namespace LibraryTerminalProject
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
-            string filePath = "Audiobooks.txt";
-            Audiobooks l = new Audiobooks();
-            l.PrintItems(filePath);
-            l.CheckOutItem();
         }
 
         public static bool GoAgain()

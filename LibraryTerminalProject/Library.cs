@@ -65,13 +65,16 @@ namespace LibraryTerminalProject
             return line;
         }
 
-        public virtual string SearchFor()
+
+        public virtual void SearchFor()
         {
-            string line = "Hi";
-            return line;
+            
         }
 
     } 
+
+
+   
 }
 
 
