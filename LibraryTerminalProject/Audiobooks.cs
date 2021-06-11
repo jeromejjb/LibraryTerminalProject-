@@ -12,7 +12,7 @@ namespace LibraryTerminalProject
         public string Narrator { get; set; }
         public string Category { get; set; }
 
-        public void PrintItems(string filePath) //what goes in
+        public override void PrintItems(string filePath) //what goes in
         {
             StreamReader read = new StreamReader(filePath);
             string output = read.ReadToEnd();
