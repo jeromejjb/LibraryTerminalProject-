@@ -54,7 +54,7 @@ namespace LibraryTerminalProject
             }
         }
 
-        public string CheckOutItem()
+        public virtual void CheckOutItem()
         {
             string line = "Hi";
             return line;
@@ -66,13 +66,16 @@ namespace LibraryTerminalProject
             return line;
         }
 
-        public string SearchFor()
+        public virtual void SearchFor()
         {
             string line = "Hi";
             return line;
         }
 
     } 
+
+
+   
 }
 
 
