@@ -62,7 +62,7 @@ namespace LibraryTerminalProject
 
         public string ReturnItem()
         {
-            string line = "Hi";
+            string line = "Sup";
             return line;
         }
 
