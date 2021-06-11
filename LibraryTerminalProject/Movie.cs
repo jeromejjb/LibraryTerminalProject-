@@ -3,15 +3,18 @@ using System.Collections.Generic;
 using System.IO;
 using System.Text;
 
+
 namespace LibraryTerminalProject
 {
-    class Library
+    class Movie : Library
     {
-        public string Title { get; set; }
-        public string Status { get; set; }
+        public Genre Genre { get; set; }
+        //public Movie(string Status, string Title, Category Category)
+        //{
 
+        //}
 
-        public virtual void PrintItems(string filePath) //what goes in
+        public override void PrintItems(string filePath)
         {
             StreamReader read = new StreamReader(filePath);
             string output = read.ReadToEnd();
@@ -20,7 +23,7 @@ namespace LibraryTerminalProject
             List<Library> items = new List<Library>(); //change library
             foreach (string line in lines)
             {
-                Library l = ConvertToList(line);
+                Library l = ConvertToMovie(line);
                 if (l != null)
                 {
                     items.Add(l);
@@ -33,48 +36,27 @@ namespace LibraryTerminalProject
                 foreach (Library i in items)
                 {
                     Console.WriteLine(($"{index++} : {i.Title}"));
-
                 }
             }
         }
 
-        public virtual Library ConvertToList(string line)
+        public virtual Movie ConvertToMovie(string line)
         {
             string[] prop = line.Split(',');
-            Library l = new Library();
+            Movie m = new Movie();
 
-            if (prop.Length == 2) //change
+            if (prop.Length == 3) //change
             {
-                l.Status = prop[0]; //change
-                l.Title = prop[1]; //change
-                return l;
+                m.Status = prop[0]; //change
+                m.Title = prop[1]; //change
+                m.Genre = (Genre)Enum.Parse(typeof(Genre), prop[2]);
+
+                return m;
             }
             else
             {
                 return null;
             }
         }
-
-        public virtual string CheckOutItem()
-        {
-            string line = "Hi";
-            return line;
-        }
-
-        public virtual string ReturnItem()
-        {
-            string line = "Sup";
-            return line;
-        }
-
-        public virtual string SearchFor()
-        {
-            string line = "Hi";
-            return line;
-        }
-
     }
 }
-
-
-

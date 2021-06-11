@@ -1,4 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Text;
 
 namespace LibraryTerminalProject
 {
@@ -6,7 +9,11 @@ namespace LibraryTerminalProject
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            Library ll = new Library();
+            Movie mm = new Movie();
+
+            ll.PrintItems("Computers.txt");
+            mm.PrintItems("Movies.txt");
         }
     }
 }
