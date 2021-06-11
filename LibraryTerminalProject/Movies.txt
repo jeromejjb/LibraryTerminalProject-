@@ -1,0 +1,10 @@
+﻿Mean Girls, Genre.Comedy
+The Ring, Genre.Horror
+Frozen, Genre.Animated
+Transformers, Genre.Scifi
+The Cabin in the Woods, Genre.Horror
+Moana, Genre.Animated
+Cloudy with a Change of Meatballs, Genre.Animated
+Avengers: Endgame, Genre.Scifi
+Star Wars: A New Hope, Genre.Scifi
+A Walk to Remember, Genre.Drama
