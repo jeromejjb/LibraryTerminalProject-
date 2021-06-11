@@ -10,63 +10,18 @@ namespace LibraryTerminalProject
         public string Title { get; set; }
         public string Status { get; set; }
 
-
-        public void PrintItems(string filePath) //what goes in
+        public virtual void CheckOutItem()
         {
-            StreamReader read = new StreamReader(filePath);
-            string output = read.ReadToEnd();
-
-            string[] lines = output.Split('\n');
-            List<Library> items = new List<Library>(); //change library
-            foreach (string line in lines)
-            {
-                Library l = ConvertToList(line);
-                if (l != null)
-                {
-                    items.Add(l);
-                }
-            }
-
-            int index = 0;
-            if (index < items.Count)
-            {
-                foreach (Library i in items)
-                {
-                    Console.WriteLine($"{index++} : {i.Title}");
-                }
-            }
+            
         }
 
-        public Library ConvertToList(string line)
-        {
-            string[] prop = line.Split(',');
-            Library l = new Library();
-
-            if (prop.Length == 2) //change
-            {
-                l.Status = prop[0]; //change
-                l.Title = prop[1]; //change
-                return l;
-            }
-            else
-            {
-                return null;
-            }
-        }
-
-        public string CheckOutItem()
-        {
-            string line = "Hi";
-            return line;
-        }
-
-        public string ReturnItem()
+        public virtual string ReturnItem()
         {
             string line = "Sup";
             return line;
         }
 
-        public string SearchFor()
+        public virtual string SearchFor()
         {
             string line = "Hi";
             return line;
