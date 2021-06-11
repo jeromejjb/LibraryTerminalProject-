@@ -1,5 +1,5 @@
 ﻿Yes,Mean Girls,Comedy
-Yes,The Ring, Horror
+Yes,The Ring,Horror
 No,Frozen,Animated
 Yes,Transformers,Scifi
 No,The Cabin in the Woods,Horror
