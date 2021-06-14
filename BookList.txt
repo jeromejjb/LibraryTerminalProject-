@@ -1,4 +1,4 @@
-﻿No,The Great Gatsby, F. Scott Fitzgerald, Category.Fiction
+No,The Great Gatsby, F. Scott Fitzgerald, Category.Fiction
 Yes,To Kill A Mockingbird, Harper Lee, Category.Fiction
 No,Cat In The Cat, Dr. Suess, Category.Fiction
 Yes,The Lord Of The Rings, J.R.R Tolkien, Category.Fiction
