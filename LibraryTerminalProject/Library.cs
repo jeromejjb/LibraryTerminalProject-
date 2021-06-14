@@ -5,7 +5,11 @@ using System.Text;
 
 namespace LibraryTerminalProject
 {
+<<<<<<< HEAD
      public class Library
+=======
+    class Library
+>>>>>>> 3615329cf276ab20801e08cbecaa85f86f75756c
     {
         public string Title { get; set; }
         public string Status { get; set; }
@@ -13,7 +17,8 @@ namespace LibraryTerminalProject
         public string Category { get; set; }
 
 
-        public void PrintItems(string filePath) //what goes in
+        public virtual void PrintItems(string filePath)
+
         {
             StreamReader read = new StreamReader(filePath);
             string output = read.ReadToEnd();
@@ -34,12 +39,15 @@ namespace LibraryTerminalProject
             {
                 foreach (Library i in items)
                 {
-                    Console.WriteLine($"{index++} : {i.Title}");
+                    Console.WriteLine(($"{index++} : {i.Title}"));
+
                 }
             }
         }
 
-        public Library ConvertToList(string line)
+
+        public virtual Library ConvertToList(string line)
+
         {
             string[] prop = line.Split(',');
             Library l = new Library();
@@ -47,7 +55,9 @@ namespace LibraryTerminalProject
             if (prop.Length == 2) //change
             {
                 l.Status = prop[0]; //change
-                l.Title = prop[1]; //change
+                l.Title = prop[1];
+                
+                //change
                 return l;
             }
             else
@@ -56,6 +66,7 @@ namespace LibraryTerminalProject
             }
         }
 
+<<<<<<< HEAD
    
         public override ()
         {
@@ -109,6 +120,31 @@ namespace LibraryTerminalProject
         //    return line;
         //}
 
+=======
+
+   
+
+        public virtual void CheckOutItem()
+
+        {
+
+        }
+
+        public virtual string ReturnItem()
+        {
+            string line = "Sup";
+            return line;
+        }
+
+
+
+        public virtual void SearchFor()
+
+        {
+            
+        }
+
+>>>>>>> 3615329cf276ab20801e08cbecaa85f86f75756c
     }
 }
 
