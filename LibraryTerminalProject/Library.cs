@@ -36,12 +36,14 @@ namespace LibraryTerminalProject
             {
                 foreach (Library i in items)
                 {
+
                     Console.WriteLine($"{index++} : {i.Title}");
                    
                 }
             }
             read.Close();
             Console.WriteLine("I'm sorry, there has been an error in our system, please try again.");
+
             return items;
         }
 
