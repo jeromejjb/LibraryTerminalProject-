@@ -6,9 +6,9 @@ namespace LibraryTerminalProject
 {
     public enum Category
     {
-        Nonfiction,
-        Fiction,
-        Mystery,
-        YAFiction,
+        Nonfiction, 
+        Fiction, 
+        Mystery, 
+        YAFiction
     }
 }

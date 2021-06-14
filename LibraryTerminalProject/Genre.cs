@@ -6,10 +6,10 @@ namespace LibraryTerminalProject
 {
     public enum Genre
     {
-     Comedy,
-     Horror,
-     Scifi,
-     Animated,
-     Drama
+        Comedy, 
+        Horror, 
+        Scifi, 
+        Animated, 
+        Drama
     }
 }
