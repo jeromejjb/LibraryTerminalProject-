@@ -9,7 +9,9 @@ namespace LibraryTerminalProject
     {
         static void Main(string[] args)
         {
-            
+            Audiobooks a = new Audiobooks();
+            a.ReturnItem();
+            a.CheckOutItem();
         }
 
         public static bool GoAgain()

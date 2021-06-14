@@ -11,7 +11,7 @@ namespace LibraryTerminalProject
         public string Status { get; set; }
 
 
-        public virtual void PrintItems(string filePath)
+        public virtual List<Library> PrintItems(string filePath)
 
         {
             StreamReader read = new StreamReader(filePath);
@@ -34,9 +34,11 @@ namespace LibraryTerminalProject
                 foreach (Library i in items)
                 {
                     Console.WriteLine(($"{index++} : {i.Title}"));
-
+                    
                 }
             }
+            read.Close();
+            return items;
         }
 
 
