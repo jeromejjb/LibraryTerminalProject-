@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.IO;
 
 namespace LibraryTerminalProject
 {
@@ -6,7 +8,8 @@ namespace LibraryTerminalProject
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Welcome to the library");
-        }
+
+
+        }  
     }
 }

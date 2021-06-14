@@ -1,58 +1,89 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Text;
 
 namespace LibraryTerminalProject
 {
-    class Books : Library
+    public class Books : Library
     {
 
         public string Title { get; set; }
         public string Status { get; set; }
+        public string Author { get; set; }
+
         public string Category { get; set; }
 
-
-
-
-        public Library ConvertToBook(string line)
+        public Books(string Status, string Title, string Author, string Category)
         {
-            string[] prop = line.Split(',');
-            Books b = new Books();
-
-            if (prop.Length == 2) //change
-            {
-                b.Status = prop[0]; //change
-                b.Title = prop[1]; //change
-                b.Category = (Category)Enum.Parse(typeof(Catetory), prop[2]);
-                return b;
-            }
-            else
-            {
-                return null;
-            }
+            this.Status = Status;
+            this.Title = Title; 
+            this.Author = Author;
+            this.Category = Category;
         }
 
-        public void PrintAllBooks()
+        public void PrintItems(string filePath) //what goes in
         {
-            for (int i = 0; i < Books.Count; i++)
+            StreamReader read = new StreamReader(filePath);
+            string output = read.ReadToEnd();
+
+            string[] lines = output.Split('\n');
+            List<Library> items = new List<Library>(); //change library
+            foreach (string line in lines)
             {
-                Books b = Books[i];
-                string title = b.Title;
-                Console.WriteLine($"{i + 1}: {title}");
+                Library l = ConvertToList(line);
+                if (l != null)
+                {
+                    items.Add(l);
+                }
             }
+
+            int index = 0;
+            if (index < items.Count)
+            {
+                foreach (Library i in items)
+                {
+                    Console.WriteLine($"{index++} : {i.Title} : {i.Status}");
+                }
+            }
+
         }
 
+        public Books GetBook()
+        {
+            string filePath = @"BooksList.txt";
+
+        }
+
+        public static string GetUserInput(string message)
+        {
+            Console.WriteLine(message);
+            string input = Console.ReadLine().ToLower().Trim();
+            return input;
+        }
 
         public void CheckOutItem()
         {
-            Console.WriteLine($"Search for for a book by author or keyword");
+            Console.WriteLine("What book would you like to check out?");
             string input = Console.ReadLine();
-            
-           
+            int index = int.Parse(input);
+         
         }
-    }   
-    
+    }
+
+    public string ReturnItem()
+    {
+        string line = "Sup";
+        return line;
+    }
+
+    public string SearchFor()
+    {
+        string line = "Hi";
+        return line;
+    }
 
 
-    
+}
+
 }
