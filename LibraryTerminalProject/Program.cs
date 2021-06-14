@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.IO;
 <<<<<<< HEAD
@@ -13,11 +13,6 @@ namespace LibraryTerminalProject
         static void Main(string[] args)
         {
 
-<<<<<<< HEAD
-
-        }  
-=======
-        }
 
         public static bool GoAgain()
         {
