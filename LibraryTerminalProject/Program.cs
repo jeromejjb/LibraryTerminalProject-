@@ -1,10 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
-<<<<<<< HEAD
-=======
 using System.Text;
->>>>>>> 3615329cf276ab20801e08cbecaa85f86f75756c
 
 namespace LibraryTerminalProject
 {
@@ -35,6 +32,6 @@ namespace LibraryTerminalProject
                 return GoAgain();
             }
         }
->>>>>>> 3615329cf276ab20801e08cbecaa85f86f75756c
+
     }
 }
