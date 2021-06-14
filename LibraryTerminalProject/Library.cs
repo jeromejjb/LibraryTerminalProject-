@@ -11,7 +11,7 @@ namespace LibraryTerminalProject
         public string Status { get; set; }
 
 
-        public virtual string PrintItems(string filePath)
+        public virtual void PrintItems()
 
         {
             StreamReader read = new StreamReader(filePath);

@@ -135,8 +135,6 @@ namespace LibraryTerminalProject
      
         }
 
-
-
         public virtual Movie ConvertToMovie(string line)
         {
             string[] prop = line.Split(',');

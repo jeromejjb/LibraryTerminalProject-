@@ -40,16 +40,11 @@ namespace LibraryTerminalProject
 
             }
             else
-            {
-                
-
+            {   
                 DateTime current = DateTime.Now;
                 Console.WriteLine($"You can now use the computer.  You have 2 hours.  Your time started:{current}");
                 //Console.WriteLine($"Please vacate computer at {current.AddHours(2)}");
                 return $"Please vacate computer at {current.AddHours(2)}";
-
-                
-
             }
 
         }

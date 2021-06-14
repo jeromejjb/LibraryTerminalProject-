@@ -3,10 +3,10 @@ Yes, To Kill A Mockingbird, Harper Lee, Fiction
 No, Cat In The Cat, Dr. Suess, Fiction
 Yes, The Lord Of The Rings, J.R.R Tolkien,Fiction
 Yes, Imposter Syndrome, Kathy Wang,Mystery
-No,While Justice Sleeps, Stacey Abrams,Mystery
-The Anthropocene Reviewed, John Green,Nonfiction
-The 4-Hour Workweek, Tim Ferris,Nonfictoin
-Why Nations Fail, Daron Acemoglu and James A. Robinson,Nonfiction
-The Art of War, Sun Tzu, Category.Nonfiction
-Vagabonding, Rolf Potts, Category.Nonfiction
-Realm Breaker, Victoria Aveyard, YAFiction
+No, While Justice Sleeps, Stacey Abrams,Mystery
+Yes, The Anthropocene Reviewed, John Green,Nonfiction
+Yes, The 4-Hour Workweek, Tim Ferris,Nonfictoin
+Yes, Why Nations Fail, Daron Acemoglu and James A. Robinson,Nonfiction
+Yes, The Art of War, Sun Tzu, Nonfiction
+Yes, Vagabonding, Rolf Potts, Nonfiction
+Yes, Realm Breaker, Victoria Aveyard, YAFiction
