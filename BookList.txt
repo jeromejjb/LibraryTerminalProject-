@@ -1,12 +1,12 @@
-No,The Great Gatsby, F. Scott Fitzgerald, Category.Fiction
-Yes,To Kill A Mockingbird, Harper Lee, Category.Fiction
-No,Cat In The Cat, Dr. Suess, Category.Fiction
-Yes,The Lord Of The Rings, J.R.R Tolkien, Category.Fiction
-Yes,Imposter Syndrome, Kathy Wang, Category.Mystery
-No,While Justice Sleeps, Stacey Abrams, Category.Mystery
-Yes,The Anthropocene Reviewed, John Green, Category.Nonfiction
-No,The 4-Hour Workweek, Tim Ferris, Category.Nonfictoin
-Yes,Why Nations Fail, Daron Acemoglu and James A. Robinson, Category.Nonfiction
-Yes,The Art of War, Sun Tzu, Category.Nonfiction
-No,Vagabonding, Rolf Potts, Category.Nonfiction
-Yes,Realm Breaker, Victoria Aveyard, Category.Fiction
+No,The Great Gatsby, F. Scott Fitzgerald,Fiction
+Yes,To Kill A Mockingbird, Harper Lee,Fiction
+No,Cat In The Cat, Dr. Suess,Fiction
+Yes,The Lord Of The Rings, J.R.R Tolkien,Fiction
+Yes,Imposter Syndrome, Kathy Wang,Mystery
+No,While Justice Sleeps, Stacey Abrams,Mystery
+Yes,The Anthropocene Reviewed, John Green,Nonfiction
+No,The 4-Hour Workweek, Tim Ferris,Nonfictoin
+Yes,Why Nations Fail, Daron Acemoglu and James A. Robinson,Nonfiction
+Yes,The Art of War, Sun Tzu,Nonfiction
+No,Vagabonding, Rolf Potts,Nonfiction
+Yes,Realm Breaker, Victoria Aveyard,Fiction
