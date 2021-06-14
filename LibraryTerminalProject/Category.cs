@@ -10,5 +10,7 @@ namespace LibraryTerminalProject
         Fiction,
         Mystery,
         YAFiction,
+        Biography,
+        Finance
     }
 }
