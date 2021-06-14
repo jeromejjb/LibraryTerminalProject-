@@ -1,4 +1,4 @@
-﻿No, The Great Gatsby, F. Scott Fitzgerald, YAFiction
+No, The Great Gatsby, F. Scott Fitzgerald, YAFiction
 Yes, To Kill A Mockingbird, Harper Lee, Fiction
 No, Cat In The Cat, Dr. Suess, Fiction
 Yes, The Lord Of The Rings, J.R.R Tolkien,Fiction
@@ -10,3 +10,4 @@ Yes, Why Nations Fail, Daron Acemoglu and James A. Robinson,Nonfiction
 Yes, The Art of War, Sun Tzu, Nonfiction
 Yes, Vagabonding, Rolf Potts, Nonfiction
 Yes, Realm Breaker, Victoria Aveyard, YAFiction
+

@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Text;
@@ -9,15 +9,19 @@ namespace LibraryTerminalProject
     {
         static void Main(string[] args)
         {
+
+
             Console.WriteLine("Welcome to the Tri-State Library of Grand Circus-dria!");
             Console.WriteLine("What brought you in today? Would you like to browse the catalog or return an item?");
             Console.WriteLine("Please enter: 'browse' or 'return'");
             string response = GetIntention();
             Console.WriteLine(response);
 
+
         }
 
         public static string GetIntention()
+
         {
 
             string answer = Console.ReadLine().ToLower();
@@ -126,7 +130,5 @@ namespace LibraryTerminalProject
             }
 
         }
- 
-
     }
 }
