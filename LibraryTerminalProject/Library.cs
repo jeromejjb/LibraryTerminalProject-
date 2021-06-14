@@ -69,10 +69,10 @@ namespace LibraryTerminalProject
 
         }
 
-        public virtual string ReturnItem()
+        public virtual void ReturnItem()
         {
-            string line = "Sup";
-            return line;
+          
+            
         }
 
 

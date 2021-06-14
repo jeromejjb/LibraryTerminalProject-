@@ -10,10 +10,11 @@ namespace LibraryTerminalProject
     {
         public string Author { get; set; }
         public string Narrator { get; set; }
-        public string Category { get; set; }
+        public Category Category { get; set; }
 
         public override void PrintItems(string filePath) //what goes in
         {
+            Console.ForegroundColor = ConsoleColor.Blue;
             StreamReader read = new StreamReader(filePath);
             string output = read.ReadToEnd();
 
@@ -49,7 +50,7 @@ namespace LibraryTerminalProject
                 l.Title = prop[1];
                 l.Author = prop[2];
                 l.Narrator = prop[3];
-                l.Category = prop[4];
+                l.Category = (Category)Enum.Parse(typeof(Category), prop[4]);
                     //change
                 return l;
             }
@@ -61,18 +62,30 @@ namespace LibraryTerminalProject
 
         public override void CheckOutItem()
         {
+            Console.ForegroundColor = ConsoleColor.Blue;
+
             string filePath = "Audiobooks.txt";
             StreamReader read = new StreamReader(filePath);
             string output = read.ReadToEnd();
 
             string[] lines = output.Split('\n');
-            List<Audiobooks> items = new List<Audiobooks>(); //change library
+            List<Audiobooks> items = new List<Audiobooks>(); 
             foreach (string line in lines)
             {
                 Audiobooks l = ConvertToAudio(line);
                 if (l != null)
                 {
                     items.Add(l);
+                }
+            }
+
+            int index = 0;
+            if (index < items.Count)
+            {
+                
+                foreach (Audiobooks i in items)
+                {
+                    Console.WriteLine($"{index++} : STATUS({i.Status}), TITLE : {i.Title}, by {i.Author}, narrated by {i.Narrator}, genre : {i.Category}");
                 }
             }
 
@@ -92,16 +105,85 @@ namespace LibraryTerminalProject
                 
             }
         }
-        public override string ReturnItem()
+        public override void ReturnItem()
         {
-            string line = "Sup";
-            return line;
+            Console.ForegroundColor = ConsoleColor.Blue;
+
+            string filePath = "Audiobooks.txt";
+            StreamReader read = new StreamReader(filePath);
+            string output = read.ReadToEnd();
+
+            string[] lines = output.Split('\n');
+            List<Audiobooks> items = new List<Audiobooks>();
+            foreach (string line in lines)
+            {
+                Audiobooks l = ConvertToAudio(line);
+                if (l != null)
+                {
+                    items.Add(l);
+                }
+            }
+
+            int index = 0;
+            if (index < items.Count)
+            {
+
+                foreach (Audiobooks i in items)
+                {
+                    Console.WriteLine($"{index++} : STATUS({i.Status}), TITLE : {i.Title}, by {i.Author}, narrated by {i.Narrator}, genre : {i.Category}");
+                }
+            }
+
+            Console.WriteLine("What Audiobook would you like to return");
+            int input = int.Parse(Console.ReadLine());
+            Audiobooks a = items[input];
+
+            if (a.Status == "Yes")
+            {
+                Console.WriteLine("Sorry but that book is not checked out");
+            }
+            else
+            {
+                read.Close();
+                DateTime current = DateTime.Now;
+                Console.WriteLine($"You returned this audiobook at :{current}");
+                Console.WriteLine("Thank you have a nice day!");
+
+                string newLine = $"Yes, {a.Title}, {a.Author}, {a.Narrator}, {a.Category}";
+                items.Remove(a);
+
+                List<Audiobooks> lib = new List<Audiobooks>();
+
+                for (int i = 0; i < items.Count; i++)
+                {
+                    
+                    StreamWriter write = new StreamWriter("Audiobooks.txt");
+                    int num = 0;
+                    foreach (Audiobooks t in items)
+                    {
+                        if (num < 5)
+                        {
+                            write.Write($"{t.Status},{t.Title} {t.Author}, {t.Narrator}, {t.Category}\n");
+                            num++;
+                        }
+                    }
+                    write.Write($"{newLine}");
+                    write.Close();
+                }
+                
+
+                //StreamReader reader = new StreamReader(filePath);
+                //string original = reader.ReadToEnd();
+                //reader.Close();
+                //StreamWriter write = new StreamWriter("Audiobooks.txt");
+                //write.Write (original + newLine);
+            }
+
         }
 
-        public override string SearchFor()
+        public override void SearchFor()
         {
-            string line = "Hi";
-            return line;
+            
         }
 
     }
