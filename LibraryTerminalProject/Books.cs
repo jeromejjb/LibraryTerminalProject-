@@ -11,16 +11,7 @@ namespace LibraryTerminalProject
         public string Title { get; set; }
         public string Status { get; set; }
         public string Author { get; set; }
-
         public string Category { get; set; }
-
-        public Books(string Status, string Title, string Author, string Category)
-        {
-            this.Status = Status;
-            this.Title = Title; 
-            this.Author = Author;
-            this.Category = Category;
-        }
 
         public void PrintItems(string filePath) //what goes in
         {
@@ -46,12 +37,6 @@ namespace LibraryTerminalProject
                     Console.WriteLine($"{index++} : {i.Title} : {i.Status}");
                 }
             }
-
-        }
-
-        public Books GetBook()
-        {
-            string filePath = @"BooksList.txt";
 
         }
 
