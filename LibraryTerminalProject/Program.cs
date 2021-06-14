@@ -13,10 +13,11 @@ namespace LibraryTerminalProject
 
             Console.WriteLine("Welcome to the Tri-State Library of Grand Circus-dria!");
             Console.WriteLine("What brought you in today? Would you like to browse the catalog or return an item?");
+
             Console.WriteLine("Please enter: 'browse' or 'return'");
             string response = GetIntention();
             Console.WriteLine(response);
-
+            GoAgain("Would you like to browse again?");
 
         }
 
@@ -91,7 +92,6 @@ namespace LibraryTerminalProject
             else if (answer == "computers")
             {
                 Computer cc = new Computer();
-                cc.PrintItems("Computers.txt");
                 if (intention == "browse")
                 {
                     return cc.CheckOutItem();
@@ -111,7 +111,7 @@ namespace LibraryTerminalProject
 
         public static bool GoAgain(string message)
         {
-            Console.Write("Would you like to start over? Y/N");
+            Console.Write(message);
             string input = Console.ReadLine().ToUpper();
 
             if (input.StartsWith("Y"))

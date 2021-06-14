@@ -6,21 +6,17 @@ using System.Text;
 namespace LibraryTerminalProject
 {
 
-     public class Library
+    public class Library
 
     {
         public string Title { get; set; }
         public string Status { get; set; }
 
-        public string Category { get; set; }
 
-
-        public virtual List<Library> PrintItems(string filePath)
-
+        public virtual List<Library> PrintItems()
         {
-            StreamReader read = new StreamReader(filePath);
+            StreamReader read = new StreamReader("Computers.txt");
             string output = read.ReadToEnd();
-
             string[] lines = output.Split('\n');
             List<Library> items = new List<Library>();
             foreach (string line in lines)
@@ -36,15 +32,18 @@ namespace LibraryTerminalProject
             {
                 foreach (Library i in items)
                 {
-
                     Console.WriteLine($"{index++} : {i.Title}");
-                   
                 }
+                read.Close();
+                return items;
             }
-            read.Close();
-            Console.WriteLine("I'm sorry, there has been an error in our system, please try again.");
+            else
+            {
+                Console.WriteLine("I'm sorry, there has been an error in our system, please try again.");
+                return PrintItems();
+            }
 
-            return items;
+
         }
 
 
@@ -67,7 +66,7 @@ namespace LibraryTerminalProject
                 return null;
             }
         }
-   
+
 
         public virtual string SearchFor(string libraryItem)
 
@@ -93,7 +92,18 @@ namespace LibraryTerminalProject
 
         }
 
+        public virtual string CheckOutItem()
+        {
+            return "";
+        }
+        public virtual string ReturnItem()
+        {
+            return "";
+        }
+    }
+
 }
+
 
 
 
