@@ -9,6 +9,7 @@ namespace LibraryTerminalProject
 {
     class Movie : Library
     {
+        //Movie uses the parent properties, but also news a Genre (enum) property
         public Genre Genre { get; set; }
 
         public override List<Library> PrintItems()
@@ -32,6 +33,7 @@ namespace LibraryTerminalProject
             {
                 foreach (Movie h in items)
                 {
+                    //Prints the index and the title at that index
                     Console.WriteLine($"{index++} : {h.Title}");
                 }
             }
@@ -40,6 +42,7 @@ namespace LibraryTerminalProject
         }
         public override string SearchFor(string browse)
         {
+            //Need to create the list to reference for searching, but not print full list
             Console.ForegroundColor = ConsoleColor.DarkGreen;
             StreamReader read = new StreamReader("Movies.txt");
             string output = read.ReadToEnd();
@@ -57,7 +60,7 @@ namespace LibraryTerminalProject
                 }
             }
             if (browse.ToLower() == "all")
-            {
+            {//Prints all movies
                 foreach (Movie h in items)
                 {
                     Console.WriteLine($"{index++} : {h.Title}");
@@ -66,14 +69,22 @@ namespace LibraryTerminalProject
             }
             else if (browse.ToLower() == "genre")
             {
+                //Will print an array of genres from the enums list,
+                //by getting the values of each enum in Genre
                 Genre[] availableGenres = (Genre[])Enum.GetValues(typeof(Genre));
                 for (int z = 0; z < availableGenres.Length; z++)
                 {
+                    //Prints index and genres
                     Console.WriteLine($"{z} : {availableGenres[z]}");
                 }
 
-                Console.WriteLine("Which genre would you like to browse?");
-                int pick = int.Parse(Console.ReadLine());
+                Console.WriteLine("Which genre would you like to browse? (#)");
+
+                int pick;
+                while (Int32.TryParse(Console.ReadLine(), out pick) != true)
+                {
+                    Console.WriteLine("Invalid input please try again.");
+                }
 
                 Genre c = availableGenres[pick];
 
@@ -81,6 +92,8 @@ namespace LibraryTerminalProject
                 {
                     if (f.Genre == c)
                     {
+                        //This line will give the original index number for the titles from the
+                        //items list, so the user is still picking from the items list.
                         Console.WriteLine($"{items.IndexOf(f)}: {f.Title}");
                     }
                 }
@@ -94,9 +107,10 @@ namespace LibraryTerminalProject
                 {
                     Console.WriteLine("Would you like to browse another genre? (Y/N)");
                     string moreGenre = Console.ReadLine().ToLower();
+                    //To browse another genre, this will loop back through the SearchFor method.
                     if (moreGenre == "y")
                     {
-                        return SearchFor("browse");
+                        return SearchFor("genre");
                     }
                     else if (moreGenre == "n")
                     {
@@ -104,19 +118,21 @@ namespace LibraryTerminalProject
                         string browseAgain = Console.ReadLine().ToLower();
                         if (browseAgain == "y")
                         {
-                            Console.WriteLine("Would you like to browse by genre, keyword, or view all?");
+                            Console.WriteLine("Would you like to browse by genre, keyword, all?");
                             return SearchFor(Console.ReadLine().ToLower());
                         }
                     }
                 }
                 return "I don't understand, please try again.";
             }
+            //Searches the title of the movie for keywords
             else if (browse.ToLower() == "keyword")
             {
                 Console.WriteLine("Please enter a keyword to search the title for:");
                 string keyword = (Console.ReadLine().ToLower());
                 foreach (Movie m in items)
                 {
+                    //This takes the m.Title to make it a lowercase string, so the string can be check for the keyword entered
                     if (m.Title.ToString().ToLower().Contains(keyword))
                     {
                         Console.WriteLine($"{items.IndexOf(m)}: {m.Title}");
@@ -144,10 +160,12 @@ namespace LibraryTerminalProject
             string[] prop = line.Split(',');
             Movie m = new Movie();
 
-            if (prop.Length == 3) //change
+            if (prop.Length == 3)
             {
-                m.Status = prop[0]; //change
-                m.Title = prop[1]; //change
+                //This needs to be changed to reflect the number of properties for the specific child class.
+                //Movies have 3 properties, so it is changed to 3
+                m.Status = prop[0];
+                m.Title = prop[1];
                 m.Genre = (Genre)Enum.Parse(typeof(Genre), prop[2]);
                 return m;
             }
@@ -175,7 +193,7 @@ namespace LibraryTerminalProject
                     items.Add(mov);
                 }
             }
-            Console.WriteLine("\nWhich movie would you like to borrow? (Choose number)");
+            Console.WriteLine("\nWhich movie would you like to borrow? (#)");
             int resp;
             while (Int32.TryParse(Console.ReadLine(), out resp) != true)
             {
@@ -186,7 +204,17 @@ namespace LibraryTerminalProject
             if (a.Status == "No")
             {
                 Console.WriteLine("Sorry, but that movie is not available at this time.");
-                return CheckOutItem();
+                Console.WriteLine("Would you like to browse all movies?");
+
+                if (Console.ReadLine().ToLower() == "y")
+                {
+
+                    return SearchFor("all");
+                }
+                else
+                {
+                    return "";
+                }
             }
             else
             {

@@ -13,6 +13,9 @@ namespace LibraryTerminalProject
 
         public virtual List<Library> PrintItems()
         {
+            //This takes in the Computers.txt because the
+            //computer child class has no additional properties
+
             StreamReader read = new StreamReader("Computers.txt");
             string output = read.ReadToEnd();
             string[] lines = output.Split('\n', '\r');
@@ -38,6 +41,8 @@ namespace LibraryTerminalProject
             else
             {
                 Console.WriteLine("I'm sorry, there has been an error in our system, please try again.");
+
+                //Repeats the method if there is not a proper response
                 return PrintItems();
             }
 
@@ -69,6 +74,8 @@ namespace LibraryTerminalProject
         public virtual string SearchFor(string libraryItem)
 
         {
+            //Parent SearchFor will delegate to the child SearchFor methods
+
             if (libraryItem == "books")
             {
                 Console.ForegroundColor = ConsoleColor.Cyan;
@@ -92,6 +99,10 @@ namespace LibraryTerminalProject
             }
 
         }
+
+
+        //CheckOutItem and ReturnItem are not used in parent
+        //class, but must be in child classes.
 
         public virtual string CheckOutItem()
         {

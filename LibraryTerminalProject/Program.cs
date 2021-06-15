@@ -9,20 +9,34 @@ namespace LibraryTerminalProject
     {
         static void Main(string[] args)
         {
-
+            //Greets the user
             Console.ForegroundColor = ConsoleColor.White;
             Console.WriteLine("Welcome to the Tri-State Library of Grand Circus-dria!");
             Console.WriteLine("What brought you in today? Would you like to browse the catalog or return an item?");
 
+            //Will loop to allow the user to start at the beginning after
+            //running through program
             bool SearchAgain = true;
             while (SearchAgain == true)
             {
                 Console.ForegroundColor = ConsoleColor.White;
                 Console.WriteLine("Please enter: 'browse' or 'return'");
+
+                //The GetIntention method starts the process of viewing items and feeds into other methods as directed
                 string response = GetIntention();
-                Console.WriteLine(response);
-                Console.ForegroundColor = ConsoleColor.White;
-                SearchAgain = GoAgain("Would you like to start at the beginning? (Y/N)\n");
+                if (response == "You have burned down the library and set human civilization back by a few hundred years.")
+                {
+                    Console.WriteLine(response);
+                    Environment.Exit(-1);
+                }
+                else
+                {
+
+                    Console.WriteLine(response);
+                    Console.ForegroundColor = ConsoleColor.White;
+
+                    SearchAgain = GoAgain("Would you like to start at the beginning? (Y/N)\n");
+                }
             }
             Console.WriteLine("Thanks for visiting.  Come back soon!");
 
@@ -30,6 +44,9 @@ namespace LibraryTerminalProject
 
         public static string GetIntention()
         {
+            //This will direct the user based on what their "intention" is at the library.
+            //It will feed into the GetLibraryItem method to determine what class will be 
+            //chosen
             Console.ForegroundColor = ConsoleColor.White;
             string answer = Console.ReadLine().ToLower();
             if (answer == "browse")
@@ -52,6 +69,9 @@ namespace LibraryTerminalProject
 
         public static string GetLibraryItem(string intention)
         {
+            //This method takes in the response from GetIntention and plugs into
+            //the appropriate child class methods
+
             Library ll = new Library();
 
             string answer = Console.ReadLine().ToLower();
@@ -109,6 +129,8 @@ namespace LibraryTerminalProject
             }
             else
             {
+                //This will loop back to the beginning of the method
+                // to get an accurate response from user
                 Console.WriteLine("I'm sorry, I didn't understand that response.");
                 Console.WriteLine("Please enter: books, audiobooks, movies, or computers?");
                 return GetLibraryItem(intention);
