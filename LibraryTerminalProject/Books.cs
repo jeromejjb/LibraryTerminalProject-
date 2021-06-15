@@ -9,12 +9,11 @@ namespace LibraryTerminalProject
     public class Books : Library
     {
 
-        //public string Title { get; set; }
-        //public string Status { get; set; }
+      
         public string Author { get; set; }
         public Genre Category { get; set; }
 
-        public override List<Library> PrintItems() //what goes in
+        public override List<Library> PrintItems() 
         {
             StreamReader read = new StreamReader("BookList.txt");
             string output = read.ReadToEnd();
