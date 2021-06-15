@@ -7,11 +7,9 @@ namespace LibraryTerminalProject
 {
 
     public class Library
-
     {
         public string Title { get; set; }
         public string Status { get; set; }
-
 
         public virtual List<Library> PrintItems()
         {
@@ -73,22 +71,23 @@ namespace LibraryTerminalProject
         {
             if (libraryItem == "books")
             {
+                Console.ForegroundColor = ConsoleColor.Cyan;
                 Books bb = new Books();
-                Console.WriteLine("Books: Would you like to browse by author, keyword, or view all? (author, keyword, all)");
+                Console.WriteLine("Books: Would you like to browse by author, keyword, or all?");
                 return bb.SearchFor(Console.ReadLine().ToLower());
             }
             else if (libraryItem == "audiobooks")
             {
                 Console.ForegroundColor = ConsoleColor.Blue;
                 Audiobooks aa = new Audiobooks();
-                Console.WriteLine("Audiobooks:  Would you like to browse by author, narrator, keyword, or view all? (author, narrator, keyword, all)");
+                Console.WriteLine("Audiobooks:  Would you like to browse by author, narrator, keyword, or all?");
                 return aa.SearchFor(Console.ReadLine().ToLower());
             }
             else
             {
                 Console.ForegroundColor = ConsoleColor.DarkGreen;
                 Movie mm = new Movie();
-                Console.WriteLine("Movies:  Would you like to browse by genre, keyword, or view all?");
+                Console.WriteLine("Movies:  Would you like to browse by genre, keyword, or all?");
                 return mm.SearchFor(Console.ReadLine().ToLower());
             }
 
@@ -103,14 +102,8 @@ namespace LibraryTerminalProject
             return "";
         }
     }
-<<<<<<< Updated upstream
+
 
 }
 
 
-
-
-=======
-
-}
->>>>>>> Stashed changes

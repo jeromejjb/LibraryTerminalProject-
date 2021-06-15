@@ -29,7 +29,6 @@ namespace LibraryTerminalProject
         }
 
         public static string GetIntention()
-
         {
             Console.ForegroundColor = ConsoleColor.White;
             string answer = Console.ReadLine().ToLower();
@@ -69,7 +68,6 @@ namespace LibraryTerminalProject
                 {
                     return bb.ReturnItem();
                 }
-
             }
             else if (answer == "audiobooks")
             {
@@ -78,7 +76,6 @@ namespace LibraryTerminalProject
                 if (intention == "browse")
                 {
                     return ll.SearchFor(answer);
-
                 }
                 else
                 {
@@ -92,7 +89,6 @@ namespace LibraryTerminalProject
                 if (intention == "browse")
                 {
                     return ll.SearchFor(answer);
-
                 }
                 else
                 {
