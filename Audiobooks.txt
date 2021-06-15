@@ -1,6 +1,6 @@
-No, Every Day Is Extra  John Kerry,  John Kerry, Biography
-No, Rich Dad Poor Dad  Robert Kiyosaki,  Tim Wheeler, Finance
-Yes, Carry On  Rainbow Rowell,  Euan Morton, YAFiction
-No, Scrappy Little Nobody  Anna Kendrick,  Anna Kendrick, Nonfiction
-Yes, The Scorpio Races  Maggie Stiefvater,  Steve West, YAFiction
-No,  You,  Caroline Kepnes,  Santino Fontana, Fiction
+No,Every Day Is Extra,John Kerry,John Kerry,Biography
+No,Rich Dad Poor Dad,Robert Kiyosaki,Tim Wheeler,Finance
+Yes,Carry On,Rainbow Rowell,Euan Morton,YAFiction
+No,Scrappy Little Nobody,Anna Kendrick,Anna Kendrick,Nonfiction
+Yes,The Scorpio Races,Maggie Stiefvater,Steve West,YAFiction
+No,You,Caroline Kepnes,Santino Fontana,Fiction

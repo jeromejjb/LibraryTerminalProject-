@@ -64,7 +64,6 @@ namespace LibraryTerminalProject
         {
             Console.ForegroundColor = ConsoleColor.Blue;
 
-            Console.WriteLine("Entire audiobook list: ");
             StreamReader read = new StreamReader("Audiobooks.txt");
             string output = read.ReadToEnd();
             read.Close();
@@ -79,7 +78,7 @@ namespace LibraryTerminalProject
                 }
             }
 
-            Console.WriteLine("Select an audiobook to that you would like to checkout");
+            Console.WriteLine("Select an audiobook to that you would like to checkout. (#)");
             int input;
             while (Int32.TryParse(Console.ReadLine(), out input) != true)
             {
@@ -97,7 +96,11 @@ namespace LibraryTerminalProject
                 Console.WriteLine($"You checked out this audiobook at :{current}");
                 Console.WriteLine($"Please return audio book by {current.AddDays(14)}");
 
+                //this takes the selected audiobook removes it from the txt file
+                //and then replaces it at the bottom of the text file changing the status
                 string newLine = $"No,{a.Title},{a.Author},{a.Narrator},{a.Category}\n";
+
+                //removes object a from list and txt file
                 items.Remove(a);
 
                 for (int i = 0; i < items.Count; i++)
@@ -106,6 +109,8 @@ namespace LibraryTerminalProject
                     int num = 0;
                     foreach (Audiobooks t in items)
                     {
+                        // Since there are 6 things in the list,
+                        // this changes for each child class
                         if (num < 5)
                         {
                             write.Write($"{t.Status},{t.Title},{t.Author},{t.Narrator},{t.Category}\n");
@@ -190,9 +195,9 @@ namespace LibraryTerminalProject
                 Console.WriteLine("Would you like to check out an audiobook from this list? Y/N");
                 string ans = Console.ReadLine();
                 Console.WriteLine();
-                if (ans.ToLower() == "no")
+                if (ans.ToLower() == "n")
                 {
-                    Console.WriteLine("Okay thank you.");
+                    return "";
                 }
                 else
                 {
@@ -203,19 +208,18 @@ namespace LibraryTerminalProject
             else if (browse == "author")
             {
                 Console.WriteLine("Please enter an author to search for:");
-                string keyword = Console.ReadLine();
+                string keyword = Console.ReadLine().ToLower();
                 foreach (Audiobooks m in items)
                 {
-                    if (m.Author.Contains(keyword))
+                    if (m.Author.ToString().ToLower().Contains(keyword))
                     {
                         Console.WriteLine($"{items.IndexOf(m)}: {m.Title}");
-                        Console.WriteLine();
-                        Console.WriteLine("Would you like to check out an audiobook from this list? Y/N");
-                        string ans = Console.ReadLine();
-                        Console.WriteLine();
-                        if (ans.ToLower() == "no")
+
+                        Console.WriteLine("\nWould you like to check out an audiobook from this list? Y/N");
+                        string ans = Console.ReadLine().ToLower();
+                        if (ans == "n")
                         {
-                            Console.WriteLine("Okay thank you.");
+                            return "";
                         }
                         else
                         {
@@ -231,19 +235,19 @@ namespace LibraryTerminalProject
             else if (browse == "narrator")
             {
                 Console.WriteLine("Please enter a narrator to search for:");
-                string keyword = Console.ReadLine();
+                string keyword = Console.ReadLine().ToLower();
                 foreach (Audiobooks m in items)
                 {
-                    if (m.Narrator.Contains(keyword))
+                    if (m.Narrator.ToLower().Contains(keyword))
                     {
                         Console.WriteLine($"{items.IndexOf(m)}: {m.Title}");
                         Console.WriteLine();
                         Console.WriteLine("Would you like to check out an audiobook from this list? Y/N");
                         string ans = Console.ReadLine();
                         Console.WriteLine();
-                        if (ans.ToLower() == "no")
+                        if (ans.ToLower() == "n")
                         {
-                            Console.WriteLine("Okay thank you.");
+                            return "";
                         }
                         else
                         {
@@ -259,19 +263,19 @@ namespace LibraryTerminalProject
             else
             {
                 Console.WriteLine("Please enter a keyword to search the title for:");
-                string keyword = Console.ReadLine();
+                string keyword = Console.ReadLine().ToLower();
                 foreach (Audiobooks m in items)
                 {
-                    if (m.Title.Contains(keyword))
+                    if (m.Title.ToLower().Contains(keyword))
                     {
                         Console.WriteLine($"{items.IndexOf(m)}: {m.Title}");
-                        Console.WriteLine();
-                        Console.WriteLine("Would you like to check out an audiobook from this list? Y/N");
+
+                        Console.WriteLine("\nWould you like to check out an audiobook from this list? Y/N");
                         string ans = Console.ReadLine();
                         Console.WriteLine();
-                        if (ans.ToLower() == "no")
+                        if (ans.ToLower() == "n")
                         {
-                            Console.WriteLine("Okay thank you.");
+                            return "";
                         }
                         else
                         {
