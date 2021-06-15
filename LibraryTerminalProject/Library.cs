@@ -17,7 +17,7 @@ namespace LibraryTerminalProject
         {
             StreamReader read = new StreamReader("Computers.txt");
             string output = read.ReadToEnd();
-            string[] lines = output.Split('\n');
+            string[] lines = output.Split('\n', '\r');
             List<Library> items = new List<Library>();
             foreach (string line in lines)
             {
@@ -74,19 +74,21 @@ namespace LibraryTerminalProject
             if (libraryItem == "books")
             {
                 Books bb = new Books();
-                Console.WriteLine("Would you like to browse by author, keyword, or view all? (author, keyword, all)");
+                Console.WriteLine("Books: Would you like to browse by author, keyword, or view all? (author, keyword, all)");
                 return bb.SearchFor(Console.ReadLine().ToLower());
             }
             else if (libraryItem == "audiobooks")
             {
+                Console.ForegroundColor = ConsoleColor.Blue;
                 Audiobooks aa = new Audiobooks();
-                Console.WriteLine("Would you like to browse by author, narrator, keyword, or view all? (author, narrator, keyword, all)");
+                Console.WriteLine("Audiobooks:  Would you like to browse by author, narrator, keyword, or view all? (author, narrator, keyword, all)");
                 return aa.SearchFor(Console.ReadLine().ToLower());
             }
             else
             {
+                Console.ForegroundColor = ConsoleColor.DarkGreen;
                 Movie mm = new Movie();
-                Console.WriteLine("Would you like to browse by genre, keyword, or view all?");
+                Console.WriteLine("Movies:  Would you like to browse by genre, keyword, or view all?");
                 return mm.SearchFor(Console.ReadLine().ToLower());
             }
 

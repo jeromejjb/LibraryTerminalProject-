@@ -1,8 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Text;
-
+using System.Text.RegularExpressions;
 
 namespace LibraryTerminalProject
 {
@@ -12,6 +13,7 @@ namespace LibraryTerminalProject
 
         public override List<Library> PrintItems()
         {
+            Console.ForegroundColor = ConsoleColor.DarkGreen;
             StreamReader read = new StreamReader("Movies.txt");
             string output = read.ReadToEnd();
 
@@ -33,15 +35,19 @@ namespace LibraryTerminalProject
                     }
                 }
             }
+            read.Close();
             return items;
+            Console.ForegroundColor = ConsoleColor.White;
         }
         public override string SearchFor(string browse)
         {
+            Console.ForegroundColor = ConsoleColor.DarkGreen;
             StreamReader read = new StreamReader("Movies.txt");
             string output = read.ReadToEnd();
-
             string[] lines = output.Split('\n');
-            List<Movie> items = new List<Movie>(); //change library
+            List<Movie> items = new List<Movie>();
+            read.Close();
+
             int index = 0;
             foreach (string line in lines)
             {
@@ -51,18 +57,15 @@ namespace LibraryTerminalProject
                     items.Add(m);
                 }
             }
-            if (browse == "all")
+            if (browse.ToLower() == "all")
             {
-                if (index < items.Count)
+                foreach (Movie h in items)
                 {
-                    foreach (Movie h in items)
-                    {
-                        Console.WriteLine($"{index++} : {h.Title}");
-                    }
-                    return CheckOutItem();
+                    Console.WriteLine($"{index++} : {h.Title}");
                 }
+                return CheckOutItem();
             }
-            else if (browse == "genre")
+            else if (browse.ToLower() == "genre")
             {
                 Genre[] availableGenres = (Genre[])Enum.GetValues(typeof(Genre));
                 for (int z = 0; z < availableGenres.Length; z++)
@@ -73,15 +76,13 @@ namespace LibraryTerminalProject
                 Console.WriteLine("Which genre would you like to browse?");
                 int pick = int.Parse(Console.ReadLine());
 
-                //foreach (Movie i in items)
-                //{
                 Genre c = availableGenres[pick];
-                
+
                 foreach (Movie f in items)
                 {
                     if (f.Genre == c)
                     {
-                        Console.WriteLine($"{f.Title}");
+                        Console.WriteLine($"{items.IndexOf(f)}: {f.Title}");
                     }
                 }
                 Console.WriteLine("\nWould you like to check out one of these movies? (Y/N)");
@@ -100,96 +101,166 @@ namespace LibraryTerminalProject
                     }
                     else if (moreGenre == "n")
                     {
-                        Console.WriteLine("Would you like to continue to browse the library? (Y/N)");
+                        Console.WriteLine("Would you like to continue to browse movies? (Y/N)");
                         string browseAgain = Console.ReadLine().ToLower();
                         if (browseAgain == "y")
                         {
-                            return "browse";
+                            Console.WriteLine("Would you like to browse by genre, keyword, or view all?");
+                            return SearchFor(Console.ReadLine().ToLower());
                         }
+
                     }
+
                 }
-            
-        }
-            else
+                return "I don't understand, please try again.";
+
+            }
+            else if (browse.ToLower() == "keyword")
             {
                 Console.WriteLine("Please enter a keyword to search the title for:");
-                string keyword = Console.ReadLine();
+                string keyword = (Console.ReadLine().ToLower());
                 foreach (Movie m in items)
                 {
-                    if (m.Title.Contains(keyword))
+                    if (m.Title.ToString().ToLower().Contains(keyword))
                     {
-
-                        Console.WriteLine(m.Title);
-                        return CheckOutItem();
-    }
-                    else
-                    {
-                        return "I'm sorry, we do not have any movies matching that keyword.";
+                        Console.WriteLine($"{items.IndexOf(m)}: {m.Title}");
                     }
+
+                }
+                Console.WriteLine("\nWould you like to check out a movie from this list? (Y/N)");
+                string yesCheckOut = Console.ReadLine().ToLower();
+                if (yesCheckOut == "y")
+                {
+                    return CheckOutItem();
+                }
+                else
+                {
+                    return "";
                 }
             }
-
-            return "";
-
-
-     
+            else
+            {
+                return "I'm sorry, I don't understand.";
+            }
         }
 
         public virtual Movie ConvertToMovie(string line)
-{
-    string[] prop = line.Split(',');
-    Movie m = new Movie();
-
-    if (prop.Length == 3) //change
-    {
-        m.Status = prop[0]; //change
-        m.Title = prop[1]; //change
-        m.Genre = (Genre)Enum.Parse(typeof(Genre), prop[2]);
-
-        return m;
-    }
-    else
-    {
-        return null;
-    }
-}
-
-public override string CheckOutItem()
-{
-    string filePath = "Movies.txt";
-    StreamReader read = new StreamReader(filePath);
-    string output = read.ReadToEnd();
-
-
-    string[] lines = output.Split('\n');
-    List<Movie> items = new List<Movie>();
-    foreach (string line in lines)
-    {
-        Movie mov = ConvertToMovie(line);
-        if (mov != null)
         {
-            items.Add(mov);
+            string[] prop = line.Split(',');
+            Movie m = new Movie();
+
+            if (prop.Length == 3) //change
+            {
+                m.Status = prop[0]; //change
+                m.Title = prop[1]; //change
+                m.Genre = (Genre)Enum.Parse(typeof(Genre), prop[2]);
+
+                return m;
+            }
+            else
+            {
+                return null;
+            }
         }
-    }
-    Console.WriteLine("Which movie would you like to borrow? (Choose number)");
-    int resp = int.Parse(Console.ReadLine());
-    Movie a = items[resp];
 
-    if (a.Status == "No")
-    {
-        Console.WriteLine("Sorry, but that movie is not available at this time.");
-        return CheckOutItem();
+        public override string CheckOutItem()
+        {
+            Console.ForegroundColor = ConsoleColor.DarkGreen;
 
-    }
-    else
-    {
-        DateTime current = DateTime.Now;
-        Console.WriteLine($"You have successfully borrowed {a.Title}. You have 2 days.  Your time started:{current}");
+            StreamReader read = new StreamReader("Movies.txt");
+            string output = read.ReadToEnd();
+            read.Close();
 
-        return $"Please return the movie by {current.AddDays(2)}";
+            string[] lines = output.Split('\n');
+            List<Movie> items = new List<Movie>();
+            foreach (string line in lines)
+            {
+                Movie mov = ConvertToMovie(line);
+                if (mov != null)
+                {
+                    items.Add(mov);
+                }
+            }
+            Console.WriteLine("\nWhich movie would you like to borrow? (Choose number)");
+            int resp = int.Parse(Console.ReadLine());
+            Movie a = items[resp];
 
-    }
+            if (a.Status == "No")
+            {
+                Console.WriteLine("Sorry, but that movie is not available at this time.");
+                return CheckOutItem();
+            }
+            else
+            {
+                string newLine = $"No,{a.Title},{a.Genre}\n";
+                items.Remove(a);
 
-}
+                for (int i = 0; i < items.Count; i++)
+                {
+                    StreamWriter write = new StreamWriter("Movies.txt");
+                    int num = 0;
+                    foreach (Movie t in items)
+                    {
+                        if (num < 9)
+                        {
+                            write.Write($"{t.Status},{t.Title},{t.Genre}\n");
+                            num++;
+                        }
+                    }
+                    write.Write($"{newLine}");
+                    write.Close();
+
+                }
+                DateTime current = DateTime.Now;
+                Console.WriteLine($"You have successfully borrowed {a.Title} for 2 days. Your time started:{current}");
+                return $"Please return the movie by {current.AddDays(2)}\n";
+
+            }
+
+
+        }
+        public override string ReturnItem()
+        {
+            Console.ForegroundColor = ConsoleColor.DarkGreen;
+
+            List<Library> items = new List<Library>(PrintItems());
+
+            Console.WriteLine("What movie would you like to return");
+            int input = int.Parse(Console.ReadLine());
+            Movie a = (Movie)items[input];
+
+            if (a.Status == "Yes")
+            {
+                Console.WriteLine("Sorry but that movie is not checked out");
+                return ReturnItem();
+            }
+            else
+            {
+                DateTime current = DateTime.Now;
+                Console.WriteLine($"You returned this movie at :{current}");
+
+
+                string newLine = $"Yes,{a.Title},{a.Genre}/n";
+                items.Remove(a);
+
+                for (int i = 0; i < items.Count; i++)
+                {
+                    StreamWriter write = new StreamWriter("Movies.txt");
+                    int num = 0;
+                    foreach (Movie t in items)
+                    {
+                        if (num < 9)
+                        {
+                            write.Write($"{t.Status},{t.Title},{t.Genre}\n");
+                            num++;
+                        }
+                    }
+                    write.Write($"{newLine}");
+                    write.Close();
+                }
+                return $"Movie returned: {a.Title},{a.Genre}";
+
+            }
+        }
     }
 }
