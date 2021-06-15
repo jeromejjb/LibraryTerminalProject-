@@ -11,6 +11,10 @@ namespace LibraryTerminalProject
         Animated,
         Scifi,
         Horror,
+        YAFiction,
+        Fiction,
+        Mystery,
+        Nonfiction,
         Drama
     }
 

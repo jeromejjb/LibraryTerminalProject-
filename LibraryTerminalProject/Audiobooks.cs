@@ -64,12 +64,13 @@ namespace LibraryTerminalProject
         public override string CheckOutItem()
         {
             Console.ForegroundColor = ConsoleColor.Blue;
+
             Console.WriteLine("Entire audiobook list: ");
             List<Library> items = new List<Library>(PrintItems());
 
-            Console.WriteLine("Select an Audoibook to that you would like to checkout");
+            Console.WriteLine("Select an audoibook to that you would like to checkout");
             int input = int.Parse(Console.ReadLine());
-            Audiobooks a = (Audiobooks)items[input];
+            Audiobooks a = items[input];
             if (a.Status == "No")
             {
                 Console.WriteLine("Sorry but that book is already checked out.");
@@ -101,6 +102,7 @@ namespace LibraryTerminalProject
                 }
                 return $"Audiobook checked out: {a.Title}, {a.Author}, {a.Narrator}, {a.Category}";
             }
+            Console.ForegroundColor = ConsoleColor.White;
         }
         public override string ReturnItem()
         {
@@ -142,6 +144,7 @@ namespace LibraryTerminalProject
                 }
                 return $"Audiobook returned: {a.Title}, {a.Author}, {a.Narrator}, {a.Category}";
             }
+            Console.ForegroundColor = ConsoleColor.White;
         }
 
         public override string SearchFor(string browse)
@@ -149,9 +152,9 @@ namespace LibraryTerminalProject
             Console.ForegroundColor = ConsoleColor.Blue;
             StreamReader read = new StreamReader("Audiobooks.txt");
             string output = read.ReadToEnd();
-
+            read.Close();
             string[] lines = output.Split('\n');
-            List<Audiobooks> items = new List<Audiobooks>(); //change library
+            List<Audiobooks> items = new List<Audiobooks>(); 
             int index = 0;
             foreach (string line in lines)
             {
@@ -163,8 +166,9 @@ namespace LibraryTerminalProject
             }
             if (browse == "all")
             {
-                if (index < items.Count)
+                foreach (Audiobooks h in items)
                 {
+
                     foreach (Audiobooks h in items)
                     {
                         Console.WriteLine($"{index++} : {h.Title}");
@@ -180,11 +184,17 @@ namespace LibraryTerminalProject
                     {
                         return CheckOutItem();
                     }
+
+                 
+
                 }
                 return CheckOutItem();
+
             }
+
             else if (browse == "author")
             {
+
                 Console.WriteLine("Please enter an author to search for:");
                 string keyword = Console.ReadLine();
                 foreach (Audiobooks m in items)
@@ -239,6 +249,7 @@ namespace LibraryTerminalProject
                     }
                 }
             }
+
             else
             {
                 Console.WriteLine("Please enter a keyword to search the title for:");
@@ -264,7 +275,6 @@ namespace LibraryTerminalProject
                 }
             }
             return "";
-
         }
     }
 }
