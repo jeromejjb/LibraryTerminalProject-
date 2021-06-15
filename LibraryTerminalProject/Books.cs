@@ -8,11 +8,6 @@ namespace LibraryTerminalProject
 {
     public class Books : Library
     {
-<<<<<<< HEAD
-
-      
-=======
->>>>>>> 6c4be0efdf8d837a60d02e58bef9b76310b628bd
         public string Author { get; set; }
         public Genre Category { get; set; }
 
@@ -65,7 +60,9 @@ namespace LibraryTerminalProject
             }
         }
 
+
         public override string CheckOutItem()
+
         {
 
              List<Library> items = PrintItems();
@@ -271,5 +268,3 @@ namespace LibraryTerminalProject
     }
 
 }
-
-

@@ -78,6 +78,7 @@ namespace LibraryTerminalProject
                 if (intention == "browse")
                 {
                     return ll.SearchFor(answer);
+
                 }
                 else
                 {
@@ -91,6 +92,7 @@ namespace LibraryTerminalProject
                 if (intention == "browse")
                 {
                     return ll.SearchFor(answer);
+
                 }
                 else
                 {
