@@ -18,7 +18,7 @@ namespace LibraryTerminalProject
             StreamReader read = new StreamReader("Audiobooks.txt");
             string output = read.ReadToEnd();
 
-            string[] lines = output.Split('\n');
+            string[] lines = output.Split('\n', '\r');
             List<Library> items = new List<Library>();
             foreach (string line in lines)
             {
@@ -65,7 +65,8 @@ namespace LibraryTerminalProject
         {
             Console.ForegroundColor = ConsoleColor.Blue;
 
-            List<Audiobooks> items = new List<Audiobooks>();
+            Console.WriteLine("Entire audiobook list: ");
+            List<Library> items = new List<Library>(PrintItems());
 
             Console.WriteLine("Select an audoibook to that you would like to checkout");
             int input = int.Parse(Console.ReadLine());
@@ -106,7 +107,7 @@ namespace LibraryTerminalProject
         public override string ReturnItem()
         {
             Console.ForegroundColor = ConsoleColor.Blue;
-
+            Console.WriteLine("Entire audiobook list: ");
             List<Library> items = new List<Library>(PrintItems());
 
             Console.WriteLine("What Audiobook would you like to return");
@@ -167,7 +168,25 @@ namespace LibraryTerminalProject
             {
                 foreach (Audiobooks h in items)
                 {
-                    Console.WriteLine($"{index++} : {h.Title}");
+
+                    foreach (Audiobooks h in items)
+                    {
+                        Console.WriteLine($"{index++} : {h.Title}");
+                    }
+                    Console.WriteLine("Would you like to check out an audiobook from this list? Y/N");
+                    string ans = Console.ReadLine();
+                    Console.WriteLine();
+                    if (ans.ToLower() == "no")
+                    {
+                        Console.WriteLine("Okay thank you.");
+                    }
+                    else
+                    {
+                        return CheckOutItem();
+                    }
+
+                 
+
                 }
                 return CheckOutItem();
 
@@ -175,27 +194,60 @@ namespace LibraryTerminalProject
 
             else if (browse == "author")
             {
-                Console.WriteLine("Please select an author.");
-                foreach (Audiobooks h in items)
-                {
-                    Console.WriteLine($"{index++} : {h.Author}");
-                    int a = int.Parse(Console.ReadLine());
-                    Console.WriteLine($"{index++} : {h.Title[a]}");
-                }
-                return CheckOutItem();
 
+                Console.WriteLine("Please enter an author to search for:");
+                string keyword = Console.ReadLine();
+                foreach (Audiobooks m in items)
+                {
+                    if (m.Author.Contains(keyword))
+                    {
+                        Console.WriteLine(m.Title);
+                        Console.WriteLine();
+                        Console.WriteLine("Would you like to check out an audiobook from this list? Y/N");
+                        string ans = Console.ReadLine();
+                        Console.WriteLine();
+                        if (ans.ToLower() == "no")
+                        {
+                            Console.WriteLine("Okay thank you.");
+                        }
+                        else
+                        {
+                            return CheckOutItem();
+                        }
+                    }
+                    else
+                    {
+                        return "I'm sorry, we do not have any audiobooks by that author";
+                    }
+                }
             }
             else if (browse == "narrator")
             {
-                Console.WriteLine("Please select a narrator.");
-                foreach (Audiobooks h in items)
+                Console.WriteLine("Please enter a narrator to search for:");
+                string keyword = Console.ReadLine();
+                foreach (Audiobooks m in items)
                 {
-                    Console.WriteLine($"{index++} : {h.Narrator}");
-                    int a = int.Parse(Console.ReadLine());
-
-                    Console.WriteLine($"{index++} : {h.Title[a]}");
+                    if (m.Narrator.Contains(keyword))
+                    {
+                        Console.WriteLine(m.Title);
+                        Console.WriteLine();
+                        Console.WriteLine("Would you like to check out an audiobook from this list? Y/N");
+                        string ans = Console.ReadLine();
+                        Console.WriteLine();
+                        if (ans.ToLower() == "no")
+                        {
+                            Console.WriteLine("Okay thank you.");
+                        }
+                        else
+                        {
+                            return CheckOutItem();
+                        }
+                    }
+                    else
+                    {
+                        return "I'm sorry, we do not have any audiobooks with that narrator";
+                    }
                 }
-                return CheckOutItem();
             }
 
             else
@@ -206,21 +258,23 @@ namespace LibraryTerminalProject
                 {
                     if (m.Title.Contains(keyword))
                     {
-
                         Console.WriteLine(m.Title);
-                        return CheckOutItem();
-                    }
-                    else
-                    {
-                        return "I'm sorry, we do not have any movies matching that keyword.";
+                        Console.WriteLine();
+                        Console.WriteLine("Would you like to check out an audiobook from this list? Y/N");
+                        string ans = Console.ReadLine();
+                        Console.WriteLine();
+                        if (ans.ToLower() == "no")
+                        {
+                            Console.WriteLine("Okay thank you.");
+                        }
+                        else
+                        {
+                            return CheckOutItem();
+                        }
                     }
                 }
             }
             return "";
-
-            Console.ForegroundColor = ConsoleColor.White;
-
-
         }
     }
 }
