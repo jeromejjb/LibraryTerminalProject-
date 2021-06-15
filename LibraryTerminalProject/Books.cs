@@ -8,14 +8,12 @@ namespace LibraryTerminalProject
 {
     public class Books : Library
     {
-
-        //public string Title { get; set; }
-        //public string Status { get; set; }
         public string Author { get; set; }
         public Genre Category { get; set; }
 
-        public override List<Library> PrintItems() //what goes in
+        public override List<Library> PrintItems() 
         {
+            Console.ForegroundColor = ConsoleColor.Cyan;
             StreamReader read = new StreamReader("BookList.txt");
             string output = read.ReadToEnd();
 
@@ -29,7 +27,6 @@ namespace LibraryTerminalProject
                     items.Add(l);
                 }
             }
-
             int index = 0;
             if (index < items.Count)
             {
@@ -40,11 +37,11 @@ namespace LibraryTerminalProject
             }
             read.Close();
             return items;
-
         }
 
         public Books ConvertToBook(string line)
         {
+            Console.ForegroundColor = ConsoleColor.Cyan;
             string[] prop = line.Split(',');
             Books b = new Books();
 
@@ -63,41 +60,54 @@ namespace LibraryTerminalProject
             }
         }
 
+
         public override string CheckOutItem()
         {
-
-             List<Library> items = PrintItems();
+            Console.ForegroundColor = ConsoleColor.Cyan;
+            List<Library> items = PrintItems();
 
              Console.WriteLine("Select a book that you would like to checkout");
-             int input = int.Parse(Console.ReadLine());
-             Books b = (Books)items[input-1];
-             if (b.Status == "Not Available")
-             {
-                 Console.WriteLine("Sorry but that book is already checked out.");
-                 return CheckOutItem();
-             }
-             else
-             {
-                 DateTime current = DateTime.Now;
-                 Console.WriteLine($"You checked out this book at :{current}");
-                 Console.WriteLine($"Please return book by {current.AddDays(14)}");
+            int input;
+            while (Int32.TryParse(Console.ReadLine(), out input) != true)
+            {
+                Console.WriteLine("Invalid input please try again.");
+            }
+            Books b = (Books)items[input-1];
+            //Burn down the library
+            if (b.Title == "Julius Caesar")
+            {
+                Console.ForegroundColor = ConsoleColor.Red;
+                return "You have burned down the library and set human civilization back by a few hundred years.";
+            }
+
+            if (b.Status == "Not Available")
+            {
+                Console.WriteLine("Sorry but that book is already checked out.");
+                return CheckOutItem();
+            }
+            else
+            {
+                DateTime current = DateTime.Now;
+                Console.WriteLine($"You checked out this book at :{current}");
+                Console.WriteLine($"Please return book by {current.AddDays(14)}");
 
                 b.Status = "Not Available";
 
                 StreamWriter write = new StreamWriter("BookList.txt");
-                     
-                     foreach (Books v in items)
-                    {
+             
+                foreach (Books v in items)
+                {
                     write.WriteLine($"{v.Status},{v.Title},{v.Author},{v.Category}");
-                     }
-                     write.Close();
+                }
+                write.Close();
           
-                 return $"Book checked out: {b.Title}, {b.Author}, {b.Category}";
-             }
+                return $"Book checked out: {b.Title}, {b.Author}, {b.Category}\n";
+            }
         }
 
         public override string SearchFor(string browse)
         {
+            Console.ForegroundColor = ConsoleColor.Cyan;
             StreamReader read = new StreamReader("BookList.txt");
             string output = read.ReadToEnd();
             read.Close();
@@ -122,7 +132,6 @@ namespace LibraryTerminalProject
                         Console.WriteLine($"{index + 1} : {b.Title}");
                         index++;
                     }
-                    
                 }
                 return CheckOutItem();
             }
@@ -142,6 +151,7 @@ namespace LibraryTerminalProject
                     {
                         Console.WriteLine($"{i + 1}: {booksByAuthor[i].Title}");
                     }
+                    Console.WriteLine("Please press the number 1");
                     selection = int.Parse(Console.ReadLine());
                     Books b = booksByAuthor[selection - 1];
                     Console.WriteLine("Would you like to check out this book (y/n)");
@@ -168,7 +178,6 @@ namespace LibraryTerminalProject
                                 write.WriteLine($"{v.Status},{v.Title},{v.Author},{v.Category}");
                             }
                             write.Close();
-
                             return $"Book checked out: {b.Title}, {b.Author}, {b.Category}";
                         }
                     }
@@ -223,16 +232,14 @@ namespace LibraryTerminalProject
 
                     }
                 }
-                return "";
-
-
-            }return "";
+            }
+            return "";
         }
 
         public override string ReturnItem()
         {
-
-                List<Library> items = PrintItems();
+            Console.ForegroundColor = ConsoleColor.Cyan;
+            List<Library> items = PrintItems();
 
             for (var i = 0; i < items.Count; i++)
             {
@@ -240,34 +247,34 @@ namespace LibraryTerminalProject
             }
 
             Console.WriteLine("Select a book that you would like to return");
-                int input = int.Parse(Console.ReadLine());
-                Books b = (Books)items[input-1];
-                if (b.Status == "Available")
-                {
-                    Console.WriteLine("Sorry but that book cannot be returned.");
-                    return ReturnItem();
-                }
-                else
-                {
-                    DateTime current = DateTime.Now;
-                    Console.WriteLine($"You returned this book at :{current}");
-
-                    b.Status = "Available";
-
-                    StreamWriter write = new StreamWriter("BookList.txt");
-
-                    foreach (Books v in items)
-                    {
-                        write.WriteLine($"{v.Status},{v.Title},{v.Author},{v.Category}");
-                    }
-                    write.Close();
-
-                    return $"Book returned: {b.Title}, {b.Author}, {b.Category}";
-                }
+            int input;
+            while (Int32.TryParse(Console.ReadLine(), out input) != true)
+            {
+                Console.WriteLine("Invalid input please try again.");
             }
+            Books b = (Books)items[input-1];
+            if (b.Status == "Available")
+            {
+                Console.WriteLine("Sorry but that book cannot be returned.");
+                return ReturnItem();
+            }
+            else
+            {
+                DateTime current = DateTime.Now;
+                Console.WriteLine($"You returned this book at :{current}");
 
+                b.Status = "Available";
+
+                StreamWriter write = new StreamWriter("BookList.txt");
+
+                foreach (Books v in items)
+                {
+                    write.WriteLine($"{v.Status},{v.Title},{v.Author},{v.Category}");
+                }
+                write.Close();
+
+                return $"Book returned: {b.Title}, {b.Author}, {b.Category}\n";
+            }
+        }
     }
-
 }
-
-

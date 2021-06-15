@@ -19,7 +19,6 @@ namespace LibraryTerminalProject
 
             string[] lines = output.Split('\n');
             List<Library> items = new List<Library>(); //change library
-            int index = 0;
             foreach (string line in lines)
             {
                 Movie m = ConvertToMovie(line);
@@ -27,17 +26,17 @@ namespace LibraryTerminalProject
                 {
                     items.Add(m);
                 }
-                if (index < items.Count)
+            }
+            int index = 0;
+            if (index < items.Count)
+            {
+                foreach (Movie h in items)
                 {
-                    foreach (Movie h in items)
-                    {
-                        Console.WriteLine($"{index++} : {h.Title}");
-                    }
+                    Console.WriteLine($"{index++} : {h.Title}");
                 }
             }
             read.Close();
             return items;
-            Console.ForegroundColor = ConsoleColor.White;
         }
         public override string SearchFor(string browse)
         {
@@ -108,12 +107,9 @@ namespace LibraryTerminalProject
                             Console.WriteLine("Would you like to browse by genre, keyword, or view all?");
                             return SearchFor(Console.ReadLine().ToLower());
                         }
-
                     }
-
                 }
                 return "I don't understand, please try again.";
-
             }
             else if (browse.ToLower() == "keyword")
             {
@@ -125,7 +121,6 @@ namespace LibraryTerminalProject
                     {
                         Console.WriteLine($"{items.IndexOf(m)}: {m.Title}");
                     }
-
                 }
                 Console.WriteLine("\nWould you like to check out a movie from this list? (Y/N)");
                 string yesCheckOut = Console.ReadLine().ToLower();
@@ -154,7 +149,6 @@ namespace LibraryTerminalProject
                 m.Status = prop[0]; //change
                 m.Title = prop[1]; //change
                 m.Genre = (Genre)Enum.Parse(typeof(Genre), prop[2]);
-
                 return m;
             }
             else
@@ -182,7 +176,11 @@ namespace LibraryTerminalProject
                 }
             }
             Console.WriteLine("\nWhich movie would you like to borrow? (Choose number)");
-            int resp = int.Parse(Console.ReadLine());
+            int resp;
+            while (Int32.TryParse(Console.ReadLine(), out resp) != true)
+            {
+                Console.WriteLine("Invalid input please try again.");
+            }
             Movie a = items[resp];
 
             if (a.Status == "No")
@@ -209,15 +207,11 @@ namespace LibraryTerminalProject
                     }
                     write.Write($"{newLine}");
                     write.Close();
-
                 }
                 DateTime current = DateTime.Now;
                 Console.WriteLine($"You have successfully borrowed {a.Title} for 2 days. Your time started:{current}");
                 return $"Please return the movie by {current.AddDays(2)}\n";
-
             }
-
-
         }
         public override string ReturnItem()
         {
@@ -226,7 +220,11 @@ namespace LibraryTerminalProject
             List<Library> items = new List<Library>(PrintItems());
 
             Console.WriteLine("What movie would you like to return");
-            int input = int.Parse(Console.ReadLine());
+            int input;
+            while (Int32.TryParse(Console.ReadLine(), out input) != true)
+            {
+                Console.WriteLine("Invalid input please try again.");
+            }
             Movie a = (Movie)items[input];
 
             if (a.Status == "Yes")
@@ -239,8 +237,7 @@ namespace LibraryTerminalProject
                 DateTime current = DateTime.Now;
                 Console.WriteLine($"You returned this movie at :{current}");
 
-
-                string newLine = $"Yes,{a.Title},{a.Genre}/n";
+                string newLine = $"Yes,{a.Title},{a.Genre}\n";
                 items.Remove(a);
 
                 for (int i = 0; i < items.Count; i++)
@@ -258,8 +255,7 @@ namespace LibraryTerminalProject
                     write.Write($"{newLine}");
                     write.Close();
                 }
-                return $"Movie returned: {a.Title},{a.Genre}";
-
+                return $"Movie returned: {a.Title},{a.Genre}\n";
             }
         }
     }

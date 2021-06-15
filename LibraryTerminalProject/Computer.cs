@@ -10,7 +10,6 @@ namespace LibraryTerminalProject
     {
         public Computer()
         {
-
         }
         public override string CheckOutItem()
         {
@@ -18,13 +17,16 @@ namespace LibraryTerminalProject
             List<Library> items = new List<Library>(PrintItems());
 
             Console.WriteLine("Which computer would you like to use? (Enter number)");
-            int resp = int.Parse(Console.ReadLine());
+            int resp;
+            while (Int32.TryParse(Console.ReadLine(), out resp) != true)
+            {
+                Console.WriteLine("Invalid input please try again.");
+            }
             Library a = (Library)items[resp];
             if (a.Status.ToLower() == "no")
             {
                 Console.WriteLine("Sorry but that computer is already in use.");
                 return CheckOutItem();
-
             }
             else
             {
@@ -47,11 +49,8 @@ namespace LibraryTerminalProject
                     }
                     write.Write($"{newLine}");
                     write.Close();
-
                 }
-                return $"Please vacate computer at {current.AddHours(2)}";
-
-
+                return $"Please vacate computer at {current.AddHours(2)}\n";
             }
         }
 
@@ -59,13 +58,16 @@ namespace LibraryTerminalProject
         {
             Console.ForegroundColor = ConsoleColor.Yellow;
             List<Library> items = new List<Library>(PrintItems());
-
             Console.WriteLine($"Are you finished using the computer? (Y/N)");
             string finished = Console.ReadLine().ToLower();
             if (finished == "y")
             {
-                Console.WriteLine("Which computer would you like to check back in?");
-                int resp = int.Parse(Console.ReadLine());
+                Console.WriteLine("Which computer would you like to check back in? (#)");
+                int resp;
+                while(Int32.TryParse(Console.ReadLine(), out resp) != true)
+                {
+                    Console.WriteLine("Invalid input please try again.");
+                }
                 Library a = (Library)items[resp];
                 if (a.Status.ToLower() == "no")
                 {
@@ -85,10 +87,8 @@ namespace LibraryTerminalProject
                         }
                         write.Write($"{newLine}");
                         write.Close();
-
                     }
                     return "Thank you!";
-
                 }
             }
             else if (finished == "n")
@@ -97,7 +97,7 @@ namespace LibraryTerminalProject
                 if (Console.ReadLine().ToLower() == "y")
                 {
                     DateTime current = DateTime.Now;
-                    return $"Please vacate computer at {current.AddHours(2)}";
+                    return $"Please vacate computer at {current.AddHours(2)}\n";
                 }
                 else
                 {
@@ -109,11 +109,7 @@ namespace LibraryTerminalProject
                 Console.WriteLine("I don't understand...");
                 return ReturnItem();
             }
-
             return "";
-
         }
-
-
     }
 }
