@@ -4,7 +4,7 @@ using System.Text;
 
 namespace LibraryTerminalProject
 {
-    public enum Category
+    public enum Category  //used in books and audiobooks classes
     {
         Nonfiction,
         Fiction,
