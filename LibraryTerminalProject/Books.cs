@@ -11,7 +11,7 @@ namespace LibraryTerminalProject
         public string Author { get; set; }
         public Genre Category { get; set; }
 
-        public override List<Library> PrintItems() 
+        public override List<Library> PrintItems()
         {
             Console.ForegroundColor = ConsoleColor.Cyan;
             StreamReader read = new StreamReader("BookList.txt");
@@ -66,17 +66,18 @@ namespace LibraryTerminalProject
             Console.ForegroundColor = ConsoleColor.Cyan;
             List<Library> items = PrintItems();
 
-             Console.WriteLine("Select a book that you would like to checkout");
+            Console.WriteLine("Select a book that you would like to checkout");
             int input;
             while (Int32.TryParse(Console.ReadLine(), out input) != true)
             {
                 Console.WriteLine("Invalid input please try again.");
             }
-            Books b = (Books)items[input-1];
+            Books b = (Books)items[input - 1];
             //Burn down the library
             if (b.Title == "Julius Caesar")
             {
                 Console.ForegroundColor = ConsoleColor.Red;
+
                 return "You have burned down the library and set human civilization back by a few hundred years.";
             }
 
@@ -94,13 +95,13 @@ namespace LibraryTerminalProject
                 b.Status = "Not Available";
 
                 StreamWriter write = new StreamWriter("BookList.txt");
-             
+
                 foreach (Books v in items)
                 {
                     write.WriteLine($"{v.Status},{v.Title},{v.Author},{v.Category}");
                 }
                 write.Close();
-          
+
                 return $"Book checked out: {b.Title}, {b.Author}, {b.Category}\n";
             }
         }
@@ -139,6 +140,7 @@ namespace LibraryTerminalProject
             {
                 if (index < items.Count)
                 {
+                    //Getting all the authors and storing them in a list alphabetically
                     List<string> authors = items.Select(a => a.Author).OrderBy(a => a).ToList();
                     for (var i = 0; i < authors.Count(); i++)
                     {
@@ -158,6 +160,12 @@ namespace LibraryTerminalProject
 
                     if (Console.ReadLine() == "y")
                     {
+                        if (b.Title == "Julius Caesar")
+                        {
+                            Console.ForegroundColor = ConsoleColor.Red;
+
+                            return "You have burned down the library and set human civilization back by a few hundred years.";
+                        }
                         if (b.Status == "Not Available")
                         {
                             Console.WriteLine("Sorry but that book is already checked out.");
@@ -178,7 +186,7 @@ namespace LibraryTerminalProject
                                 write.WriteLine($"{v.Status},{v.Title},{v.Author},{v.Category}");
                             }
                             write.Close();
-                            return $"Book checked out: {b.Title}, {b.Author}, {b.Category}";
+                            return $"Book checked out: {b.Title}, {b.Author}, {b.Category}\n";
                         }
                     }
                 }
@@ -187,6 +195,8 @@ namespace LibraryTerminalProject
             {
                 Console.WriteLine("Please enter a keyword to search the title for:");
                 string keyword = Console.ReadLine();
+                //Getting any books where the keyword is contained in title and putting them in a list
+
 
                 List<Books> booksByKeyword = items.Where(b => b.Title.ToLower().Contains(keyword.ToLower())).ToList();
                 if (booksByKeyword.Count() == 0)
@@ -198,14 +208,20 @@ namespace LibraryTerminalProject
                 for (var i = 0; i < booksByKeyword.Count(); i++)
                 {
                     Console.WriteLine($"{i + 1}: {booksByKeyword[i].Title}");
-                    Console.WriteLine("Select a book by it's number");
                 }
+                Console.WriteLine("Select a book by it's number");
                 int selection = int.Parse(Console.ReadLine());
 
                 Books b = booksByKeyword[selection - 1];
                 Console.WriteLine("Would you like to check out this book (y/n)");
 
                 if (Console.ReadLine() == "y")
+                    if (b.Title == "Julius Caesar")
+                    {
+                        Console.ForegroundColor = ConsoleColor.Red;
+
+                        return "You have burned down the library and set human civilization back by a few hundred years.";
+                    }
                 {
                     if (b.Status == "Not Available")
                     {
@@ -228,7 +244,7 @@ namespace LibraryTerminalProject
                         }
                         write.Close();
 
-                        return $"Book checked out: {b.Title}, {b.Author}, {b.Category}";
+                        return $"Book checked out: {b.Title}, {b.Author}, {b.Category}\n";
 
                     }
                 }
@@ -243,7 +259,7 @@ namespace LibraryTerminalProject
 
             for (var i = 0; i < items.Count; i++)
             {
-                Console.WriteLine($"{i+1} : {items[i].Title}");
+                Console.WriteLine($"{i + 1} : {items[i].Title}");
             }
 
             Console.WriteLine("Select a book that you would like to return");
@@ -252,7 +268,7 @@ namespace LibraryTerminalProject
             {
                 Console.WriteLine("Invalid input please try again.");
             }
-            Books b = (Books)items[input-1];
+            Books b = (Books)items[input - 1];
             if (b.Status == "Available")
             {
                 Console.WriteLine("Sorry but that book cannot be returned.");
@@ -261,7 +277,7 @@ namespace LibraryTerminalProject
             else
             {
                 DateTime current = DateTime.Now;
-                Console.WriteLine($"You returned this book at :{current}");
+                Console.WriteLine($"You returned this book at :{current}\n");
 
                 b.Status = "Available";
 
