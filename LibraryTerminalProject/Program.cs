@@ -10,21 +10,28 @@ namespace LibraryTerminalProject
         static void Main(string[] args)
         {
 
-
+            Console.ForegroundColor = ConsoleColor.White;
             Console.WriteLine("Welcome to the Tri-State Library of Grand Circus-dria!");
             Console.WriteLine("What brought you in today? Would you like to browse the catalog or return an item?");
 
-            Console.WriteLine("Please enter: 'browse' or 'return'");
-            string response = GetIntention();
-            Console.WriteLine(response);
-            GoAgain("Would you like to browse again?");
+            bool SearchAgain = true;
+            while (SearchAgain == true)
+            {
+                Console.ForegroundColor = ConsoleColor.White;
+                Console.WriteLine("Please enter: 'browse' or 'return'");
+                string response = GetIntention();
+                Console.WriteLine(response);
+                Console.ForegroundColor = ConsoleColor.White;
+                SearchAgain = GoAgain("Would you like to start at the beginning? (Y/N)\n");
+            }
+            Console.WriteLine("Thanks for visiting.  Come back soon!");
 
         }
 
         public static string GetIntention()
 
         {
-
+            Console.ForegroundColor = ConsoleColor.White;
             string answer = Console.ReadLine().ToLower();
             if (answer == "browse")
             {
@@ -49,13 +56,14 @@ namespace LibraryTerminalProject
             Library ll = new Library();
 
             string answer = Console.ReadLine().ToLower();
+
             if (answer == "books")
             {
                 Books bb = new Books();
-                bb.PrintItems("BookList.txt");
+                //bb.PrintItems("BookList.txt");
                 if (intention == "browse")
                 {
-                    return ll.SearchFor(intention);
+                    return ll.SearchFor(answer);
                 }
                 else
                 {
@@ -69,7 +77,7 @@ namespace LibraryTerminalProject
 
                 if (intention == "browse")
                 {
-                    return ll.SearchFor(intention);
+                    return ll.SearchFor(answer);
                 }
                 else
                 {
@@ -82,7 +90,7 @@ namespace LibraryTerminalProject
 
                 if (intention == "browse")
                 {
-                    return ll.SearchFor(intention);
+                    return ll.SearchFor(answer);
                 }
                 else
                 {
@@ -126,7 +134,7 @@ namespace LibraryTerminalProject
             }
             else
             {
-                return GoAgain("I'm sorry, I didn't understand.");
+                return GoAgain("I'm sorry, I didn't understand.  Please answer Y/N.");
             }
 
         }
