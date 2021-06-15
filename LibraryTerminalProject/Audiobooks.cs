@@ -65,11 +65,11 @@ namespace LibraryTerminalProject
         {
             Console.ForegroundColor = ConsoleColor.Blue;
 
-            List<Library> items = new List<Library>(PrintItems());
+            List<Audiobooks> items = new List<Audiobooks>();
 
-            Console.WriteLine("Select an Audoibook to that you would like to checkout");
+            Console.WriteLine("Select an audoibook to that you would like to checkout");
             int input = int.Parse(Console.ReadLine());
-            Audiobooks a = (Audiobooks)items[input];
+            Audiobooks a = items[input];
             if (a.Status == "No")
             {
                 Console.WriteLine("Sorry but that book is already checked out.");
@@ -101,6 +101,7 @@ namespace LibraryTerminalProject
                 }
                 return $"Audiobook checked out: {a.Title}, {a.Author}, {a.Narrator}, {a.Category}";
             }
+            Console.ForegroundColor = ConsoleColor.White;
         }
         public override string ReturnItem()
         {
@@ -142,15 +143,17 @@ namespace LibraryTerminalProject
                 }
                 return $"Audiobook returned: {a.Title}, {a.Author}, {a.Narrator}, {a.Category}";
             }
+            Console.ForegroundColor = ConsoleColor.White;
         }
 
         public override string SearchFor(string browse)
         {
+            Console.ForegroundColor = ConsoleColor.Blue;
             StreamReader read = new StreamReader("Audiobooks.txt");
             string output = read.ReadToEnd();
-
+            read.Close();
             string[] lines = output.Split('\n');
-            List<Audiobooks> items = new List<Audiobooks>(); //change library
+            List<Audiobooks> items = new List<Audiobooks>(); 
             int index = 0;
             foreach (string line in lines)
             {
@@ -162,23 +165,39 @@ namespace LibraryTerminalProject
             }
             if (browse == "all")
             {
-                if (index < items.Count)
+                foreach (Audiobooks h in items)
                 {
-                    foreach (Audiobooks h in items)
-                    {
-                        Console.WriteLine($"{index++} : {h.Title}");
-                    }
+                    Console.WriteLine($"{index++} : {h.Title}");
                 }
                 return CheckOutItem();
+
             }
+
             else if (browse == "author")
             {
-                return "";
+                Console.WriteLine("Please select an author.");
+                foreach (Audiobooks h in items)
+                {
+                    Console.WriteLine($"{index++} : {h.Author}");
+                    int a = int.Parse(Console.ReadLine());
+                    Console.WriteLine($"{index++} : {h.Title[a]}");
+                }
+                return CheckOutItem();
+
             }
             else if (browse == "narrator")
             {
-                return "";
+                Console.WriteLine("Please select a narrator.");
+                foreach (Audiobooks h in items)
+                {
+                    Console.WriteLine($"{index++} : {h.Narrator}");
+                    int a = int.Parse(Console.ReadLine());
+
+                    Console.WriteLine($"{index++} : {h.Title[a]}");
+                }
+                return CheckOutItem();
             }
+
             else
             {
                 Console.WriteLine("Please enter a keyword to search the title for:");
@@ -196,8 +215,10 @@ namespace LibraryTerminalProject
                         return "I'm sorry, we do not have any movies matching that keyword.";
                     }
                 }
-                return "";
             }
+            return "";
+
+            Console.ForegroundColor = ConsoleColor.White;
 
 
         }
