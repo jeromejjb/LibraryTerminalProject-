@@ -64,7 +64,7 @@ namespace LibraryTerminalProject
         public override string CheckOutItem()
         {
             Console.ForegroundColor = ConsoleColor.Blue;
-
+            Console.WriteLine("Entire audiobook list: ");
             List<Library> items = new List<Library>(PrintItems());
 
             Console.WriteLine("Select an Audoibook to that you would like to checkout");
@@ -105,7 +105,7 @@ namespace LibraryTerminalProject
         public override string ReturnItem()
         {
             Console.ForegroundColor = ConsoleColor.Blue;
-
+            Console.WriteLine("Entire audiobook list: ");
             List<Library> items = new List<Library>(PrintItems());
 
             Console.WriteLine("What Audiobook would you like to return");
@@ -146,6 +146,7 @@ namespace LibraryTerminalProject
 
         public override string SearchFor(string browse)
         {
+            Console.ForegroundColor = ConsoleColor.Blue;
             StreamReader read = new StreamReader("Audiobooks.txt");
             string output = read.ReadToEnd();
 
@@ -168,16 +169,75 @@ namespace LibraryTerminalProject
                     {
                         Console.WriteLine($"{index++} : {h.Title}");
                     }
+                    Console.WriteLine("Would you like to check out an audiobook from this list? Y/N");
+                    string ans = Console.ReadLine();
+                    Console.WriteLine();
+                    if (ans.ToLower() == "no")
+                    {
+                        Console.WriteLine("Okay thank you.");
+                    }
+                    else
+                    {
+                        return CheckOutItem();
+                    }
                 }
                 return CheckOutItem();
             }
             else if (browse == "author")
             {
-                return "";
+                Console.WriteLine("Please enter an author to search for:");
+                string keyword = Console.ReadLine();
+                foreach (Audiobooks m in items)
+                {
+                    if (m.Author.Contains(keyword))
+                    {
+                        Console.WriteLine(m.Title);
+                        Console.WriteLine();
+                        Console.WriteLine("Would you like to check out an audiobook from this list? Y/N");
+                        string ans = Console.ReadLine();
+                        Console.WriteLine();
+                        if (ans.ToLower() == "no")
+                        {
+                            Console.WriteLine("Okay thank you.");
+                        }
+                        else
+                        {
+                            return CheckOutItem();
+                        }
+                    }
+                    else
+                    {
+                        return "I'm sorry, we do not have any audiobooks by that author";
+                    }
+                }
             }
             else if (browse == "narrator")
             {
-                return "";
+                Console.WriteLine("Please enter a narrator to search for:");
+                string keyword = Console.ReadLine();
+                foreach (Audiobooks m in items)
+                {
+                    if (m.Narrator.Contains(keyword))
+                    {
+                        Console.WriteLine(m.Title);
+                        Console.WriteLine();
+                        Console.WriteLine("Would you like to check out an audiobook from this list? Y/N");
+                        string ans = Console.ReadLine();
+                        Console.WriteLine();
+                        if (ans.ToLower() == "no")
+                        {
+                            Console.WriteLine("Okay thank you.");
+                        }
+                        else
+                        {
+                            return CheckOutItem();
+                        }
+                    }
+                    else
+                    {
+                        return "I'm sorry, we do not have any audiobooks with that narrator";
+                    }
+                }
             }
             else
             {
@@ -187,18 +247,23 @@ namespace LibraryTerminalProject
                 {
                     if (m.Title.Contains(keyword))
                     {
-
                         Console.WriteLine(m.Title);
-                        return CheckOutItem();
-                    }
-                    else
-                    {
-                        return "I'm sorry, we do not have any movies matching that keyword.";
+                        Console.WriteLine();
+                        Console.WriteLine("Would you like to check out an audiobook from this list? Y/N");
+                        string ans = Console.ReadLine();
+                        Console.WriteLine();
+                        if (ans.ToLower() == "no")
+                        {
+                            Console.WriteLine("Okay thank you.");
+                        }
+                        else
+                        {
+                            return CheckOutItem();
+                        }
                     }
                 }
-                return "";
             }
-
+            return "";
 
         }
     }

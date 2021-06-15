@@ -55,7 +55,7 @@ namespace LibraryTerminalProject
                 bb.PrintItems("BookList.txt");
                 if (intention == "browse")
                 {
-                    return ll.SearchFor(intention);
+                    return ll.SearchFor(answer);
                 }
                 else
                 {
@@ -69,7 +69,7 @@ namespace LibraryTerminalProject
 
                 if (intention == "browse")
                 {
-                    return ll.SearchFor(intention);
+                    return ll.SearchFor(answer);
                 }
                 else
                 {
@@ -82,7 +82,7 @@ namespace LibraryTerminalProject
 
                 if (intention == "browse")
                 {
-                    return ll.SearchFor(intention);
+                    return ll.SearchFor(answer);
                 }
                 else
                 {
