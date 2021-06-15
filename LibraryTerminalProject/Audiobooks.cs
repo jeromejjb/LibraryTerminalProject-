@@ -18,7 +18,7 @@ namespace LibraryTerminalProject
             StreamReader read = new StreamReader("Audiobooks.txt");
             string output = read.ReadToEnd();
 
-            string[] lines = output.Split('\n');
+            string[] lines = output.Split('\n', '\r');
             List<Library> items = new List<Library>();
             foreach (string line in lines)
             {
