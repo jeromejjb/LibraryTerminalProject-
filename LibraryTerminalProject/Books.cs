@@ -11,7 +11,7 @@ namespace LibraryTerminalProject
         public string Author { get; set; }
         public Genre Category { get; set; }
 
-        public override List<Library> PrintItems() //what goes in
+        public override List<Library> PrintItems() 
         {
             StreamReader read = new StreamReader("BookList.txt");
             string output = read.ReadToEnd();
@@ -60,7 +60,9 @@ namespace LibraryTerminalProject
             }
         }
 
+
         public override string CheckOutItem()
+
         {
 
              List<Library> items = PrintItems();
@@ -266,5 +268,3 @@ namespace LibraryTerminalProject
     }
 
 }
-
-

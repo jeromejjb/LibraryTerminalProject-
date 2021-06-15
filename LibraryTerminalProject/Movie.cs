@@ -11,7 +11,13 @@ namespace LibraryTerminalProject
     {
         public Genre Genre { get; set; }
 
+<<<<<<< Updated upstream
         public override List<Library> PrintItems()
+=======
+        //}
+
+        public void PrintItems(string filePath)
+>>>>>>> Stashed changes
         {
             Console.ForegroundColor = ConsoleColor.DarkGreen;
             StreamReader read = new StreamReader("Movies.txt");

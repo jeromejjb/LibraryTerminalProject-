@@ -274,7 +274,21 @@ namespace LibraryTerminalProject
                     }
                 }
             }
+
             return "";
+
+
+                        Console.WriteLine(m.Title);
+                        return CheckOutItem();
+                    }
+                    else
+                    {
+                        return "I'm sorry, we do not have any movies matching that keyword.";
+                    }
+                }
+                return "";
+            }
+
         }
     }
 }
