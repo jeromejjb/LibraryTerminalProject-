@@ -9,7 +9,7 @@ namespace LibraryTerminalProject
     public class Books : Library
     {
         public string Author { get; set; }
-        public Genre Category { get; set; }
+        public Category Category { get; set; }
 
         public override List<Library> PrintItems()
         {
@@ -50,7 +50,7 @@ namespace LibraryTerminalProject
                 b.Status = prop[0]; //change
                 b.Title = prop[1];
                 b.Author = prop[2];
-                b.Category = (Genre)Enum.Parse(typeof(Genre), prop[3]);
+                b.Category = (Category)Enum.Parse(typeof(Category), prop[3]);
                 //change
                 return b;
             }
