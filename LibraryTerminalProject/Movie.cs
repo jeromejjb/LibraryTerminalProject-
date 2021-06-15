@@ -79,7 +79,7 @@ namespace LibraryTerminalProject
                 }
 
                 Console.WriteLine("Which genre would you like to browse? (#)");
-                
+
                 int pick;
                 while (Int32.TryParse(Console.ReadLine(), out pick) != true)
                 {
@@ -107,10 +107,10 @@ namespace LibraryTerminalProject
                 {
                     Console.WriteLine("Would you like to browse another genre? (Y/N)");
                     string moreGenre = Console.ReadLine().ToLower();
+                    //To browse another genre, this will loop back through the SearchFor method.
                     if (moreGenre == "y")
                     {
-                        //To browse another genre, this will loop back through the SearchFor method.
-                        return SearchFor("browse");
+                        return SearchFor("genre");
                     }
                     else if (moreGenre == "n")
                     {
@@ -160,12 +160,12 @@ namespace LibraryTerminalProject
             string[] prop = line.Split(',');
             Movie m = new Movie();
 
-            if (prop.Length == 3) 
+            if (prop.Length == 3)
             {
                 //This needs to be changed to reflect the number of properties for the specific child class.
                 //Movies have 3 properties, so it is changed to 3
-                m.Status = prop[0]; 
-                m.Title = prop[1]; 
+                m.Status = prop[0];
+                m.Title = prop[1];
                 m.Genre = (Genre)Enum.Parse(typeof(Genre), prop[2]);
                 return m;
             }
@@ -204,7 +204,17 @@ namespace LibraryTerminalProject
             if (a.Status == "No")
             {
                 Console.WriteLine("Sorry, but that movie is not available at this time.");
-                return CheckOutItem();
+                Console.WriteLine("Would you like to browse all movies?");
+
+                if (Console.ReadLine().ToLower() == "y")
+                {
+
+                    return SearchFor("all");
+                }
+                else
+                {
+                    return "";
+                }
             }
             else
             {
