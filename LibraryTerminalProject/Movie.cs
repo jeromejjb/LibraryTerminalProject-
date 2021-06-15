@@ -10,7 +10,13 @@ namespace LibraryTerminalProject
     {
         public Genre Genre { get; set; }
 
+<<<<<<< Updated upstream
         public override List<Library> PrintItems()
+=======
+        //}
+
+        public void PrintItems(string filePath)
+>>>>>>> Stashed changes
         {
             StreamReader read = new StreamReader("Movies.txt");
             string output = read.ReadToEnd();

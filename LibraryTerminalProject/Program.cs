@@ -55,7 +55,11 @@ namespace LibraryTerminalProject
                 bb.PrintItems("BookList.txt");
                 if (intention == "browse")
                 {
+<<<<<<< Updated upstream
                     return ll.SearchFor(intention);
+=======
+                    return ll.SearchFor(answer);
+>>>>>>> Stashed changes
                 }
                 else
                 {
@@ -69,7 +73,11 @@ namespace LibraryTerminalProject
 
                 if (intention == "browse")
                 {
+<<<<<<< Updated upstream
                     return ll.SearchFor(intention);
+=======
+                    return ll.SearchFor(answer);
+>>>>>>> Stashed changes
                 }
                 else
                 {
@@ -82,7 +90,11 @@ namespace LibraryTerminalProject
 
                 if (intention == "browse")
                 {
+<<<<<<< Updated upstream
                     return ll.SearchFor(intention);
+=======
+                    return ll.SearchFor(answer);
+>>>>>>> Stashed changes
                 }
                 else
                 {

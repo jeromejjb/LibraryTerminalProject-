@@ -8,8 +8,7 @@ namespace LibraryTerminalProject
     public class Books : Library
     {
 
-        public string Title { get; set; }
-        public string Status { get; set; }
+       
         public string Author { get; set; }
         public string Category { get; set; }
 
@@ -47,6 +46,7 @@ namespace LibraryTerminalProject
             return input;
         }
 
+<<<<<<< Updated upstream
         public void CheckOutItem()
         {
             Console.WriteLine("What book would you like to check out?");
@@ -54,10 +54,16 @@ namespace LibraryTerminalProject
             int index = int.Parse(input);
          
         }
+=======
+    
+>>>>>>> Stashed changes
     }
 
 
 
 }
 
+<<<<<<< Updated upstream
 
+=======
+>>>>>>> Stashed changes

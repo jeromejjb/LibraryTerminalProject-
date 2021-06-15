@@ -187,6 +187,7 @@ namespace LibraryTerminalProject
                 {
                     if (m.Title.Contains(keyword))
                     {
+<<<<<<< Updated upstream
 
                         Console.WriteLine(m.Title);
                         return CheckOutItem();
@@ -199,6 +200,20 @@ namespace LibraryTerminalProject
                 return "";
             }
 
+=======
+
+                        Console.WriteLine(m.Title);
+                        return CheckOutItem();
+                    }
+                    else
+                    {
+                        return "I'm sorry, we do not have any movies matching that keyword.";
+                    }
+                }
+                return "";
+            }
+
+>>>>>>> Stashed changes
 
         }
     }
