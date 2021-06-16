@@ -203,7 +203,6 @@ namespace LibraryTerminalProject
                 {
                     return CheckOutItem();
                 }
-                return CheckOutItem();
             }
             else if (browse == "author")
             {
